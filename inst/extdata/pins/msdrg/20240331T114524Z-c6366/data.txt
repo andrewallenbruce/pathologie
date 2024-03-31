@@ -1,0 +1,10 @@
+file: msdrg.qs
+file_size: 10851
+pin_hash: c6366a293c28ff8a
+type: qs
+title: MS-DRG Version 36.0
+description: Medicare Severity Diagnosis-Related Groups (MS-DRGs) Version 36.0
+tags: ~
+urls: ~
+created: 20240331T114524Z
+api_version: 1
