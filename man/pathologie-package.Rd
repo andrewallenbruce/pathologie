@@ -8,6 +8,13 @@
 \description{
 What the package does (one paragraph).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://andrewallenbruce.github.io/pathologie/}
+}
+
+}
 \author{
 \strong{Maintainer}: Andrew Bruce \email{andrew.bruce@northstarrevenueintegrity.com} [copyright holder]
 
