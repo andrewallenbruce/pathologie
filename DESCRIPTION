@@ -24,6 +24,7 @@ Imports:
     tidyr (>= 1.3.1),
     vctrs (>= 0.6.5)
 Suggests: 
+    gt,
     knitr,
     rmarkdown,
     roxyglobals

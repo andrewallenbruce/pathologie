@@ -22,7 +22,7 @@ The goal of pathologie is to ...
 
 ## Installation
 
-You can install the development version of **pathologie** from [GitHub](https://github.com/) with:
+You can install **pathologie** from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
@@ -33,6 +33,19 @@ pak::pak("andrewallenbruce/pathologie")
 
 This is a basic example which shows you how to solve a common problem:
 
-```{r example}
+```{r setup}
 library(pathologie)
+library(dplyr)
 ```
+
+
+```{r}
+icd10cm(code = c("I10", "I15.0")) |> 
+  glimpse()
+```
+
+
+```{r}
+icd10api(code = "I1")
+```
+

@@ -7,13 +7,108 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+  collapse  = FALSE,
+  echo      = TRUE,
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 600, 
+  out.width = "100%"
+  )
+
+library(dplyr)
+library(gt)
+library(pathologie)
 ```
 
-```{r setup}
+```{r}
 library(pathologie)
+```
+
+
+# ICD-10-CM
+
+```{r}
+icd10cm(code = "I10") |> 
+  mutate(Chapter = paste0("* ", chapter_name, " \n ", "* Range: [", chapter_range, "]"),
+         Section = paste0("* ", section_name, " \n ", "* Range: [", section_range, "]")
+         ) |>
+  select("ICD-10-Code"   = code, 
+         Description     = description, 
+         Chapter,
+         Section,
+         Abbreviation    = abb) |> 
+  display_long() |>
+  gt(groupname_col       = "name", 
+     row_group_as_column = TRUE) |>
+  fmt_markdown() |> 
+  gt_style(tablign       = "right", 
+           tabsize       = 16, 
+           tabwt         = "bold") |> 
+  tab_style(
+      style              = cell_text(
+      font               = google_font(name = "Fira Code")),
+      locations          = cells_body(
+        columns          = contains("value"))) |>
+  tab_style(
+    style                = list(
+      cell_fill(color    = "powderblue"),
+      cell_text(weight   = "bold"),
+      cell_borders(
+      sides              = c("all"),
+      color              = "powderblue",
+      weight             = px(3))
+      ),
+    locations            = cells_row_groups())
+```
+
+
+# The NLM's ICD-10-CM API
+
+The [National Library of Medicine](https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html)'s ICD-10-CM API is a RESTful API that provides access to the current ICD-10-CM code set. 
+
+The API allows users to search for codes by code or keyword(term), and returns the code and its description. Searching is case insensitive and greedy The following are some examples:
+
+
+> Returns the seven ICD-10 codes beginning with `A15`:
+
+```{r}
+icd10api(code = "A15")
+```
+
+> Returns all 344 ICD-10 codes associated with tuberculosis:
+
+```{r}
+icd10api(term = "tuber")
+```
+
+> Returns the two ICD-10 codes associated with pleurisy:
+
+```{r}
+icd10api(term = "pleurisy")
+```
+
+## The `field` Parameter
+
+The `field` parameter allows users to specify whether they want to search for ICD-10-CM codes by the codes themselves or by terms associated with their description. It defaults to `"code"` and it's behavior warrants some explanation.
+
+If you're searching for codes beginning with a certain letter, you must set the `field` parameter to `"code"` or it will return both codes and terms that contain that letter. 
+
+
+For instance, the following call returns ICD-10 **codes** and **descriptions** containing the letter "Z":
+
+
+```{r}
+icd10api(code = "z", limit = 50)
+```
+
+
+While the call below returns only the ICD-10 **codes** containing "Z":
+
+
+```{r}
+icd10api(code = "z", field = "code", limit = 50)
 ```
