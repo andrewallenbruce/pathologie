@@ -79,7 +79,147 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/pathologie/">pathologie</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+<div class="section level2">
+<h2 id="icd-10-cm">ICD-10-CM<a class="anchor" aria-label="anchor" href="#icd-10-cm"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"I10"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Chapter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">chapter_name</span>, <span class="st">" \n "</span>, <span class="st">"* Range: ["</span>, <span class="va">chapter_range</span>, <span class="st">"]"</span><span class="op">)</span>,</span>
+<span>         Section <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">section_name</span>, <span class="st">" \n "</span>, <span class="st">"* Range: ["</span>, <span class="va">section_range</span>, <span class="st">"]"</span><span class="op">)</span></span>
+<span>         <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"ICD-10-Code"</span>   <span class="op">=</span> <span class="va">code</span>, </span>
+<span>         Description     <span class="op">=</span> <span class="va">description</span>, </span>
+<span>         <span class="va">Chapter</span>,</span>
+<span>         <span class="va">Section</span>,</span>
+<span>         Abbreviation    <span class="op">=</span> <span class="va">abb</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="op">(</span>groupname_col       <span class="op">=</span> <span class="st">"name"</span>, </span>
+<span>     row_group_as_column <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">fmt_markdown</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt_style</span><span class="op">(</span>tablign       <span class="op">=</span> <span class="st">"right"</span>, </span>
+<span>           tabsize       <span class="op">=</span> <span class="fl">16</span>, </span>
+<span>           tabwt         <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tab_style</span><span class="op">(</span></span>
+<span>      style              <span class="op">=</span> <span class="fu">cell_text</span><span class="op">(</span></span>
+<span>      font               <span class="op">=</span> <span class="fu">google_font</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      locations          <span class="op">=</span> <span class="fu">cells_body</span><span class="op">(</span></span>
+<span>        columns          <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"value"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tab_style</span><span class="op">(</span></span>
+<span>    style                <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu">cell_fill</span><span class="op">(</span>color    <span class="op">=</span> <span class="st">"powderblue"</span><span class="op">)</span>,</span>
+<span>      <span class="fu">cell_text</span><span class="op">(</span>weight   <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>      <span class="fu">cell_borders</span><span class="op">(</span></span>
+<span>      sides              <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span><span class="op">)</span>,</span>
+<span>      color              <span class="op">=</span> <span class="st">"powderblue"</span>,</span>
+<span>      weight             <span class="op">=</span> <span class="fu">px</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="op">)</span>,</span>
+<span>    locations            <span class="op">=</span> <span class="fu">cells_row_groups</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in gt_style(fmt_markdown(gt(display_long(select(mutate(icd10cm(code = "I10"), : could not find function "gt_style"</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="the-nlms-icd-10-cm-api">The NLM’s ICD-10-CM API<a class="anchor" aria-label="anchor" href="#the-nlms-icd-10-cm-api"></a>
+</h2>
+<p>The <a href="https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html" class="external-link">National
+Library of Medicine</a>’s ICD-10-CM API is a RESTful API that provides
+access to the current ICD-10-CM code set.</p>
+<p>The API allows users to search for codes by code or keyword(term),
+and returns the code and its description. Searching is case insensitive
+and greedy The following are some examples:</p>
+<blockquote>
+<p>Returns the seven ICD-10 codes beginning with <code>A15</code>:</p>
+</blockquote>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10api.html">icd10api</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"A15"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
+<span><span class="co">#&gt;   code  description                                 </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> A15.0 Tuberculosis of lung                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> A15.4 Tuberculosis of intrathoracic lymph nodes   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> A15.5 Tuberculosis of larynx, trachea and bronchus</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> A15.6 Tuberculous pleurisy                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> A15.7 Primary respiratory tuberculosis            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> A15.8 Other respiratory tuberculosis              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> A15.9 Respiratory tuberculosis unspecified</span></span></code></pre>
+<blockquote>
+<p>Returns all 344 ICD-10 codes associated with tuberculosis:</p>
+</blockquote>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10api.html">icd10api</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"tuber"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 344 × 2</span></span></span>
+<span><span class="co">#&gt;    code   description                                 </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> A15.0  Tuberculosis of lung                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> A15.4  Tuberculosis of intrathoracic lymph nodes   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> A15.5  Tuberculosis of larynx, trachea and bronchus</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> A15.6  Tuberculous pleurisy                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> A15.7  Primary respiratory tuberculosis            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> A15.8  Other respiratory tuberculosis              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> A15.9  Respiratory tuberculosis unspecified        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> A17.0  Tuberculous meningitis                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> A17.1  Meningeal tuberculoma                       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> A17.81 Tuberculoma of brain and spinal cord        </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 334 more rows</span></span></span></code></pre>
+<blockquote>
+<p>Returns the two ICD-10 codes associated with pleurisy:</p>
+</blockquote>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10api.html">icd10api</a></span><span class="op">(</span>term <span class="op">=</span> <span class="st">"pleurisy"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   code  description         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> R09.1 Pleurisy            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> A15.6 Tuberculous pleurisy</span></span></code></pre>
+<div class="section level3">
+<h3 id="the-field-parameter">The <code>field</code> Parameter<a class="anchor" aria-label="anchor" href="#the-field-parameter"></a>
+</h3>
+<p>The <code>field</code> parameter allows users to specify whether they
+want to search for ICD-10-CM codes by the codes themselves or by terms
+associated with their description. It defaults to <code>"code"</code>
+and it’s behavior warrants some explanation.</p>
+<p>If you’re searching for codes beginning with a certain letter, you
+must set the <code>field</code> parameter to <code>"code"</code> or it
+will return both codes and terms that contain that letter.</p>
+<p>For instance, the following call returns ICD-10
+<strong>codes</strong> and <strong>descriptions</strong> containing the
+letter “Z”:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10api.html">icd10api</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"z"</span>, limit <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 50 × 2</span></span></span>
+<span><span class="co">#&gt;    code   description                                                          </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> A28.8  Other specified zoonotic bacterial diseases, not elsewhere classified</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> A28.9  Zoonotic bacterial disease, unspecified                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> A92.5  Zika virus disease                                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> B02.0  Zoster encephalitis                                                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> B02.1  Zoster meningitis                                                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> B02.30 Zoster ocular disease, unspecified                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> B02.31 Zoster conjunctivitis                                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> B02.32 Zoster iridocyclitis                                                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> B02.33 Zoster keratitis                                                     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> B02.34 Zoster scleritis                                                     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 40 more rows</span></span></span></code></pre>
+<p>While the call below returns only the ICD-10 <strong>codes</strong>
+containing “Z”:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10api.html">icd10api</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"z"</span>, field <span class="op">=</span> <span class="st">"code"</span>, limit <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 50 × 2</span></span></span>
+<span><span class="co">#&gt;    code    description                                                          </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Z00.00  Encounter for general adult medical examination without abnormal fin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Z00.01  Encounter for general adult medical examination with abnormal findin…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Z00.110 Health examination for newborn under 8 days old                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Z00.111 Health examination for newborn 8 to 28 days old                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Z00.121 Encounter for routine child health examination with abnormal findings</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Z00.129 Encounter for routine child health examination without abnormal find…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Z00.2   Encounter for examination for period of rapid growth in childhood    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Z00.3   Encounter for examination for adolescent development state           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Z00.5   Encounter for examination of potential donor of organ and tissue     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Z00.6   Encounter for examination for normal comparison and control in clini…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 40 more rows</span></span></span></code></pre>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

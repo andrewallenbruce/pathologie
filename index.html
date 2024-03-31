@@ -72,7 +72,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <strong>pathologie</strong> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install <strong>pathologie</strong> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"andrewallenbruce/pathologie"</span><span class="op">)</span></span></code></pre></div>
@@ -82,7 +82,54 @@
 </h2>
 <p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/pathologie/">pathologie</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/pathologie/">pathologie</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     filter, lag</span></span>
+<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I10"</span>, <span class="st">"I15.0"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 2</span></span>
+<span><span class="co">#&gt; Columns: 10</span></span>
+<span><span class="co">#&gt; $ ch            &lt;int&gt; 9, 9</span></span>
+<span><span class="co">#&gt; $ abb           &lt;chr&gt; "CARDIO", "CARDIO"</span></span>
+<span><span class="co">#&gt; $ chapter_name  &lt;chr&gt; "Diseases of the circulatory system", "Diseases of the c…</span></span>
+<span><span class="co">#&gt; $ chapter_range &lt;chr&gt; "I00 - I99", "I00 - I99"</span></span>
+<span><span class="co">#&gt; $ section_name  &lt;chr&gt; "Other rheumatic heart diseases", "Secondary hypertensio…</span></span>
+<span><span class="co">#&gt; $ section_range &lt;chr&gt; "I09 - I10", "I15 - I15.9"</span></span>
+<span><span class="co">#&gt; $ order         &lt;int&gt; 11397, 11411</span></span>
+<span><span class="co">#&gt; $ valid         &lt;int&gt; 1, 1</span></span>
+<span><span class="co">#&gt; $ code          &lt;chr&gt; "I10", "I15.0"</span></span>
+<span><span class="co">#&gt; $ description   &lt;chr&gt; "Essential (primary) hypertension", "Renovascular hypert…</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/icd10api.html">icd10api</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"I1"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 2</span></span>
+<span><span class="co">#&gt;    code   description                                                           </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;                                                                 </span></span>
+<span><span class="co">#&gt;  1 I10    Essential (primary) hypertension                                      </span></span>
+<span><span class="co">#&gt;  2 I11.0  Hypertensive heart disease with heart failure                         </span></span>
+<span><span class="co">#&gt;  3 I11.9  Hypertensive heart disease without heart failure                      </span></span>
+<span><span class="co">#&gt;  4 I12.0  Hypertensive chronic kidney disease with stage 5 chronic kidney disea…</span></span>
+<span><span class="co">#&gt;  5 I12.9  Hypertensive chronic kidney disease with stage 1 through stage 4 chro…</span></span>
+<span><span class="co">#&gt;  6 I13.0  Hypertensive heart and chronic kidney disease with heart failure and …</span></span>
+<span><span class="co">#&gt;  7 I13.10 Hypertensive heart and chronic kidney disease without heart failure, …</span></span>
+<span><span class="co">#&gt;  8 I13.11 Hypertensive heart and chronic kidney disease without heart failure, …</span></span>
+<span><span class="co">#&gt;  9 I13.2  Hypertensive heart and chronic kidney disease with heart failure and …</span></span>
+<span><span class="co">#&gt; 10 I15.0  Renovascular hypertension                                             </span></span>
+<span><span class="co">#&gt; 11 I15.1  Hypertension secondary to other renal disorders                       </span></span>
+<span><span class="co">#&gt; 12 I15.2  Hypertension secondary to endocrine disorders                         </span></span>
+<span><span class="co">#&gt; 13 I15.8  Other secondary hypertension                                          </span></span>
+<span><span class="co">#&gt; 14 I15.9  Secondary hypertension, unspecified                                   </span></span>
+<span><span class="co">#&gt; 15 I16.0  Hypertensive urgency                                                  </span></span>
+<span><span class="co">#&gt; 16 I16.1  Hypertensive emergency                                                </span></span>
+<span><span class="co">#&gt; 17 I16.9  Hypertensive crisis, unspecified                                      </span></span>
+<span><span class="co">#&gt; 18 I1A.0  Resistant hypertension</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
