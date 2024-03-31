@@ -12,6 +12,8 @@ What the package does (one paragraph).
 Useful links:
 \itemize{
   \item \url{https://andrewallenbruce.github.io/pathologie/}
+  \item \url{https://github.com/andrewallenbruce/pathologie}
+  \item Report bugs at \url{https://github.com/andrewallenbruce/pathologie/issues}
 }
 
 }
