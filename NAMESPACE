@@ -2,6 +2,8 @@
 
 export(case_chapter_icd10)
 export(display_long)
+export(gt_marks)
+export(gt_style)
 export(icd10api)
 export(icd10cm)
 export(is_valid_icd)

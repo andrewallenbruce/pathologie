@@ -3,12 +3,14 @@
 
 # pathologie
 
+> Tidy ICD-10-CM Interface
+
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of pathologie is to …
+<br>
 
-## Installation
+## :package: Installation
 
 You can install **pathologie** from [GitHub](https://github.com/) with:
 
@@ -17,21 +19,11 @@ You can install **pathologie** from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/pathologie")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## :beginner: Usage
 
 ``` r
 library(pathologie)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 ```
 
 ``` r
@@ -75,3 +67,18 @@ icd10api(code = "I1")
 #> 17 I16.9  Hypertensive crisis, unspecified                                      
 #> 18 I1A.0  Resistant hypertension
 ```
+
+------------------------------------------------------------------------
+
+## :balance_scale: Code of Conduct
+
+Please note that the `pathologie` project is released with a
+[Contributor Code of
+Conduct](https://andrewallenbruce.github.io/pathologie/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+## :classical_building: Governance
+
+This project is primarily maintained by [Andrew
+Bruce](https://github.com/andrewallenbruce). Other authors may
+occasionally assist with some of these duties.

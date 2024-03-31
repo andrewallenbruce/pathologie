@@ -6,7 +6,7 @@
 \alias{pathologie-package}
 \title{pathologie: Tidy ICD-10-CM Tools}
 \description{
-What the package does (one paragraph).
+Tools for working with ICD-10-CM codes.
 }
 \seealso{
 Useful links:

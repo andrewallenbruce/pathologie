@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Andrew", "Bruce", , "andrew.bruce@northstarrevenueintegrity.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrew.bruce@northstarrevenueintegrity.com>
-Description: What the package does (one paragraph).
+Description: Tools for working with ICD-10-CM codes.
 License: MIT + file LICENSE
 URL: https://andrewallenbruce.github.io/pathologie/,
     https://github.com/andrewallenbruce/pathologie
@@ -27,7 +27,8 @@ Suggests:
     gt,
     knitr,
     rmarkdown,
-    roxyglobals
+    roxyglobals,
+    fontawesome
 VignetteBuilder: 
     knitr
 Config/roxyglobals/filename: roxyglobals-generated.R
