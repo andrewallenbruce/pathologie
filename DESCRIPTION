@@ -29,7 +29,8 @@ Suggests:
     knitr,
     rmarkdown,
     roxyglobals,
-    fontawesome
+    fontawesome,
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Config/roxyglobals/filename: roxyglobals-generated.R
@@ -38,3 +39,4 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
 RoxygenNote: 7.3.1
+Config/testthat/edition: 3

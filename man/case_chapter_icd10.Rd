@@ -7,7 +7,7 @@
 case_chapter_icd10(df, col)
 }
 \arguments{
-\item{df}{\verb{<chr>}data frame}
+\item{df}{\verb{<data.frame>}data frame}
 
 \item{col}{\verb{<sym>} unquoted column name of ICD-10-CM codes to match}
 }
@@ -18,8 +18,7 @@ A \link[tibble:tibble-package]{tibble} with a \code{chapter} column
 Add ICD-10-CM Chapter Labels
 }
 \examples{
-dplyr::tibble(code = c(
-              "F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
-              "E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818")) |>
-              case_chapter_icd10(code)
+dplyr::tibble(code = c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
+"E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818")) |>
+case_chapter_icd10(code)
 }

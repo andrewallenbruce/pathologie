@@ -1,13 +1,17 @@
 #' Add ICD-10-CM Chapter Labels
-#' @param df `<chr>`data frame
+#'
+#' @param df `<data.frame>`data frame
+#'
 #' @param col `<sym>` unquoted column name of ICD-10-CM codes to match
+#'
 #' @return A [tibble][tibble::tibble-package] with a `chapter` column
+#'
 #' @examples
-#' dplyr::tibble(code = c(
-#'               "F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
-#'               "E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818")) |>
-#'               case_chapter_icd10(code)
+#' dplyr::tibble(code = c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4",
+#' "E06.3", "H00.019", "D50.1", "C4A.70", "Z20.818")) |>
+#' case_chapter_icd10(code)
 #' @export
+#'
 #' @autoglobal
 case_chapter_icd10 <- function(df, col) {
 
@@ -44,9 +48,12 @@ case_chapter_icd10 <- function(df, col) {
 
 
 #' ICD-10-CM Chapter Labels and Regexes
+#'
 #' @examples
 #' icd10_chapter_regex()
+#'
 #' @noRd
+#'
 #' @autoglobal
 icd10_chapter_regex <- function() {
   dplyr::tibble(
@@ -100,3 +107,48 @@ icd10_chapter_regex <- function() {
     ),
   )
 }
+
+#' Add a dot to an ICD-10 code
+#'
+#' `add_dot()` adds a dot to the ICD-10 code in the appropriate position
+#'  where one does not exist
+#'
+#' @param x A valid ICD-10 code without a dot
+#'
+#' @returns A valid ICD-10 code with a dot included
+#'
+#' @export
+#'
+#' @examples
+#' add_dot("F320")
+#'
+#' add_dot("F32")  # no dot added if code is only 3-digits
+add_dot <- function(x) {
+
+  stopifnot(!stringr::str_detect(x, stringr::fixed(".")))
+
+  ifelse(stringr::str_length(x) > 3,
+         gsub("^(.{3})(.*)$", paste0("\\1.\\2"), x),
+         x)
+}
+
+
+#' Remove dot from an ICD-10 code
+#'
+#' `remove_dot()` removes a dot from the ICD-10 code if it exists
+#'
+#' @param x A valid ICD-10 code with a dot
+#'
+#' @returns A valid ICD-10 code without a dot included
+#'
+#' @export
+#'
+#' @examples
+#' remove_dot("F32.0")
+#'
+#' remove_dot("F32")
+remove_dot <- function(x) {
+  stringr::str_remove(x, stringr::fixed("."))
+}
+
+# https://github.com/andrewallenbruce/icd10us/blob/master/R/addremove_dot.R
