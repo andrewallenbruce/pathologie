@@ -28,6 +28,9 @@
     <loc>https://andrewallenbruce.github.io/pathologie/news/index.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/pathologie/reference/add_dot.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/pathologie/reference/case_chapter_icd10.html</loc>
   </url>
   <url>
@@ -52,7 +55,13 @@
     <loc>https://andrewallenbruce.github.io/pathologie/reference/is_valid_icd.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/pathologie/reference/is_valid_icd10cm.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/pathologie/reference/pathologie-package.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/pathologie/reference/remove_dot.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/pathologie/reference/search_msdrg.html</loc>
