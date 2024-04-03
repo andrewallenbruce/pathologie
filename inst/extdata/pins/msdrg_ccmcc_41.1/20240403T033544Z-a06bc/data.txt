@@ -1,0 +1,12 @@
+file: msdrg_ccmcc_41.qs
+file_size: 238892
+pin_hash: a06bca82aa0fb8ae
+type: qs
+title: Appendix C Complications or Comorbidities Exclusion list 41.1
+description: Appendix C is a list of all of the codes that are defined as either a
+  complication or comorbidity (CC) or a major complication or comorbidity (MCC) when
+  used as a secondary diagnosis.
+tags: ~
+urls: ~
+created: 20240403T033544Z
+api_version: 1
