@@ -1,0 +1,15 @@
+file: msdrg_41.qs
+file_size: 9755
+pin_hash: 558fdae1279316e7
+type: qs
+title: Appendix A List of MS-DRGs Version 41.1
+description:
+- Appendix A contains a list of each MS-DRG with a specification
+- of the MDC and whether the MS-DRG is medical or surgical. Some
+- MS-DRGs which contain patients from multiple MDCs do not have
+- an MDC specified. The letter M is used to designate a medical
+- MS-DRG and the letter P is used to designate a surgical MS-DRG.
+tags: ~
+urls: ~
+created: 20240403T013501Z
+api_version: 1

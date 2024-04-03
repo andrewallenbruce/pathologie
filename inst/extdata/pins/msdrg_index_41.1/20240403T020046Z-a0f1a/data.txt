@@ -1,0 +1,14 @@
+file: msdrg_index_41.qs
+file_size: 469035
+pin_hash: a0f1a61030df1c83
+type: qs
+title: Appendix B Diagnosis Code/MDC/MS-DRG Index 41.1
+description:
+- The Diagnosis Code/MDC/MS-DRG Index lists each
+- diagnosis code, as well as the  MDC, and the MS-DRGs
+- to which the diagnosis is used to define the logic of
+- the DRG either as a principal or secondary diagnosis.
+tags: ~
+urls: ~
+created: 20240403T020046Z
+api_version: 1

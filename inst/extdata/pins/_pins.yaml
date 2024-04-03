@@ -4,3 +4,7 @@ icd10cm:
 - icd10cm/20240331T055428Z-905e8/
 msdrg:
 - msdrg/20240331T114524Z-c6366/
+msdrg_41.1:
+- msdrg_41.1/20240403T013501Z-558fd/
+msdrg_index_41.1:
+- msdrg_index_41.1/20240403T020046Z-a0f1a/
