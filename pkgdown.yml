@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   pathologie: pathologie.html
-last_built: 2024-04-03T01:06Z
+last_built: 2024-04-03T02:08Z
 urls:
   reference: https://andrewallenbruce.github.io/pathologie/reference
   article: https://andrewallenbruce.github.io/pathologie/articles
