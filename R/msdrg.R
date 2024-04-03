@@ -35,20 +35,37 @@ search_msdrg <- function(drg  = NULL,
 
   ms <- pins::pin_read(mount_board(), "msdrg")
 
-  if (!is.null(type)) {
-    ms <- vctrs::vec_slice(ms, ms$drg_type == type)
-  }
+  if (!is.null(type)) {ms <- vctrs::vec_slice(ms, ms$drg_type == type)}
 
-  if (!is.null(drg)) {
-    ms <- vctrs::vec_slice(ms,
-          vctrs::vec_in(ms$drg,
-          collapse::funique(drg)))
-  }
+  if (!is.null(drg)) {ms <- search_in(ms, ms$drg, drg)}
 
-  if (!is.null(mdc)) {
-    ms <- vctrs::vec_slice(ms,
-          vctrs::vec_in(ms$mdc,
-          collapse::funique(mdc)))
-  }
+  if (!is.null(mdc)) {ms <- search_in(ms, ms$mdc, mdc)}
+
   return(ms)
+}
+
+#' Search ICD-10-CM Code Edits
+#'
+#' Definitions of Medicare Code Edits, version 41.1
+#'
+#' @param code `<chr>` vector of ICD-10-CM codes
+#'
+#' @param ... Empty dots
+#'
+#' @return A [tibble][tibble::tibble-package]
+#'
+#' @examples
+#' search_edits(c("Q96.8", "N47.0", "R45.4", "A33"))
+#'
+#' @autoglobal
+#'
+#' @export
+search_edits <- function(code = NULL,
+                         ...) {
+
+  edt <- pins::pin_read(mount_board(), "code_edits")
+
+  if (!is.null(code)) {edt <- search_in(edt, edt$code, code)}
+
+  return(edt)
 }

@@ -1,3 +1,17 @@
+#' Search in data frame
+#' @noRd
+search_in <- function(df, dfcol, search) {
+  vctrs::vec_slice(
+    df,
+    vctrs::vec_in(
+      dfcol,
+      collapse::funique(
+        search
+      )
+    )
+  )
+}
+
 #' Return GitHub raw url
 #' @noRd
 gh_raw <- function(x) {
