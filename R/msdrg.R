@@ -43,29 +43,3 @@ search_msdrg <- function(drg  = NULL,
 
   return(ms)
 }
-
-#' Search ICD-10-CM Code Edits
-#'
-#' Definitions of Medicare Code Edits, version 41.1
-#'
-#' @param code `<chr>` vector of ICD-10-CM codes
-#'
-#' @param ... Empty dots
-#'
-#' @return A [tibble][tibble::tibble-package]
-#'
-#' @examples
-#' search_edits(c("Q96.8", "N47.0", "R45.4", "A33"))
-#'
-#' @autoglobal
-#'
-#' @export
-search_edits <- function(code = NULL,
-                         ...) {
-
-  edt <- pins::pin_read(mount_board(), "code_edits")
-
-  if (!is.null(code)) {edt <- search_in(edt, edt$code, code)}
-
-  return(edt)
-}
