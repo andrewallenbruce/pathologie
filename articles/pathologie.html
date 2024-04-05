@@ -83,7 +83,7 @@
 <h2 id="icd-10-cm">ICD-10-CM<a class="anchor" aria-label="anchor" href="#icd-10-cm"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"I10"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"T76.02XA"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Chapter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">chapter_name</span>, <span class="st">" \n "</span>, <span class="st">"* Range: ["</span>, <span class="va">chapter_range</span>, <span class="st">"]"</span><span class="op">)</span>,</span>
 <span>         Section <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">section_name</span>, <span class="st">" \n "</span>, <span class="st">"* Range: ["</span>, <span class="va">section_range</span>, <span class="st">"]"</span><span class="op">)</span></span>
 <span>         <span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -91,7 +91,8 @@
 <span>         Description     <span class="op">=</span> <span class="va">description</span>, </span>
 <span>         <span class="va">Chapter</span>,</span>
 <span>         <span class="va">Section</span>,</span>
-<span>         Abbreviation    <span class="op">=</span> <span class="va">abb</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>         Abbreviation    <span class="op">=</span> <span class="va">abb</span>,</span>
+<span>         Limitations     <span class="op">=</span> <span class="va">category</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="../reference/display_long.html">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="op">(</span>groupname_col       <span class="op">=</span> <span class="st">"name"</span>, </span>
 <span>     row_group_as_column <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -114,26 +115,26 @@
 <span>      weight             <span class="op">=</span> <span class="fu">px</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span>      <span class="op">)</span>,</span>
 <span>    locations            <span class="op">=</span> <span class="fu">cells_row_groups</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="gpqjavelis" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pvfrpufgxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#gpqjavelis table {
+#pvfrpufgxq table {
   font-family: 'Atkinson Hyperlegible', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gpqjavelis thead, #gpqjavelis tbody, #gpqjavelis tfoot, #gpqjavelis tr, #gpqjavelis td, #gpqjavelis th {
+#pvfrpufgxq thead, #pvfrpufgxq tbody, #pvfrpufgxq tfoot, #pvfrpufgxq tr, #pvfrpufgxq td, #pvfrpufgxq th {
   border-style: none;
 }
 
-#gpqjavelis p {
+#pvfrpufgxq p {
   margin: 0;
   padding: 0;
 }
 
-#gpqjavelis .gt_table {
+#pvfrpufgxq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -159,12 +160,12 @@
   border-left-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_caption {
+#pvfrpufgxq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gpqjavelis .gt_title {
+#pvfrpufgxq .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -176,7 +177,7 @@
   border-bottom-width: 0;
 }
 
-#gpqjavelis .gt_subtitle {
+#pvfrpufgxq .gt_subtitle {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -188,7 +189,7 @@
   border-top-width: 0;
 }
 
-#gpqjavelis .gt_heading {
+#pvfrpufgxq .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -200,13 +201,13 @@
   border-right-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_bottom_border {
+#pvfrpufgxq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_col_headings {
+#pvfrpufgxq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -221,7 +222,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_col_heading {
+#pvfrpufgxq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -241,7 +242,7 @@
   overflow-x: hidden;
 }
 
-#gpqjavelis .gt_column_spanner_outer {
+#pvfrpufgxq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -253,15 +254,15 @@
   padding-right: 4px;
 }
 
-#gpqjavelis .gt_column_spanner_outer:first-child {
+#pvfrpufgxq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gpqjavelis .gt_column_spanner_outer:last-child {
+#pvfrpufgxq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gpqjavelis .gt_column_spanner {
+#pvfrpufgxq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -273,11 +274,11 @@
   width: 100%;
 }
 
-#gpqjavelis .gt_spanner_row {
+#pvfrpufgxq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gpqjavelis .gt_group_heading {
+#pvfrpufgxq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -303,7 +304,7 @@
   text-align: left;
 }
 
-#gpqjavelis .gt_empty_group_heading {
+#pvfrpufgxq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -318,15 +319,15 @@
   vertical-align: middle;
 }
 
-#gpqjavelis .gt_from_md > :first-child {
+#pvfrpufgxq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gpqjavelis .gt_from_md > :last-child {
+#pvfrpufgxq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gpqjavelis .gt_row {
+#pvfrpufgxq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -345,7 +346,7 @@
   overflow-x: hidden;
 }
 
-#gpqjavelis .gt_stub {
+#pvfrpufgxq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -358,7 +359,7 @@
   padding-right: 5px;
 }
 
-#gpqjavelis .gt_stub_row_group {
+#pvfrpufgxq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -372,15 +373,15 @@
   vertical-align: top;
 }
 
-#gpqjavelis .gt_row_group_first td {
+#pvfrpufgxq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gpqjavelis .gt_row_group_first th {
+#pvfrpufgxq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gpqjavelis .gt_summary_row {
+#pvfrpufgxq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -390,16 +391,16 @@
   padding-right: 5px;
 }
 
-#gpqjavelis .gt_first_summary_row {
+#pvfrpufgxq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_first_summary_row.thick {
+#pvfrpufgxq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gpqjavelis .gt_last_summary_row {
+#pvfrpufgxq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -409,7 +410,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_grand_summary_row {
+#pvfrpufgxq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -419,7 +420,7 @@
   padding-right: 5px;
 }
 
-#gpqjavelis .gt_first_grand_summary_row {
+#pvfrpufgxq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -429,7 +430,7 @@
   border-top-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_last_grand_summary_row_top {
+#pvfrpufgxq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -439,11 +440,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_striped {
+#pvfrpufgxq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gpqjavelis .gt_table_body {
+#pvfrpufgxq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -452,7 +453,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_footnotes {
+#pvfrpufgxq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -466,7 +467,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_footnote {
+#pvfrpufgxq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -475,7 +476,7 @@
   padding-right: 5px;
 }
 
-#gpqjavelis .gt_sourcenotes {
+#pvfrpufgxq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -489,7 +490,7 @@
   border-right-color: #D3D3D3;
 }
 
-#gpqjavelis .gt_sourcenote {
+#pvfrpufgxq .gt_sourcenote {
   font-size: 16px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -497,63 +498,63 @@
   padding-right: 5px;
 }
 
-#gpqjavelis .gt_left {
+#pvfrpufgxq .gt_left {
   text-align: left;
 }
 
-#gpqjavelis .gt_center {
+#pvfrpufgxq .gt_center {
   text-align: center;
 }
 
-#gpqjavelis .gt_right {
+#pvfrpufgxq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gpqjavelis .gt_font_normal {
+#pvfrpufgxq .gt_font_normal {
   font-weight: normal;
 }
 
-#gpqjavelis .gt_font_bold {
+#pvfrpufgxq .gt_font_bold {
   font-weight: bold;
 }
 
-#gpqjavelis .gt_font_italic {
+#pvfrpufgxq .gt_font_italic {
   font-style: italic;
 }
 
-#gpqjavelis .gt_super {
+#pvfrpufgxq .gt_super {
   font-size: 65%;
 }
 
-#gpqjavelis .gt_footnote_marks {
+#pvfrpufgxq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gpqjavelis .gt_asterisk {
+#pvfrpufgxq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gpqjavelis .gt_indent_1 {
+#pvfrpufgxq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gpqjavelis .gt_indent_2 {
+#pvfrpufgxq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gpqjavelis .gt_indent_3 {
+#pvfrpufgxq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gpqjavelis .gt_indent_4 {
+#pvfrpufgxq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gpqjavelis .gt_indent_5 {
+#pvfrpufgxq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -561,33 +562,39 @@
 <tr class="gt_row_group_first">
 <td headers="ICD-10-Code stub_1_1 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">ICD-10-Code</td>
 <td headers="ICD-10-Code stub_1_1 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>I10</p>
+<p>T76.02XA</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Description stub_1_2 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Description</td>
 <td headers="Description stub_1_2 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>Essential (primary) hypertension</p>
+<p>Child neglect or abandonment, suspected, initial encounter</p>
 </div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Chapter stub_1_3 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Chapter</td>
 <td headers="Chapter stub_1_3 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md"><ul>
-<li>Diseases of the circulatory system</li>
-<li>Range: [I00 - I99]</li>
+<li>Injury, poisoning and certain other consequences of external causes</li>
+<li>Range: [S00 - T88]</li>
 </ul></div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Section stub_1_4 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Section</td>
 <td headers="Section stub_1_4 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md"><ul>
-<li>Other rheumatic heart diseases</li>
-<li>Range: [I09 - I10]</li>
+<li>Adult and child abuse, neglect and other maltreatment, suspected</li>
+<li>Range: [T76 - T76.A2XS]</li>
 </ul></div></td>
 </tr>
 <tr class="gt_row_group_first">
 <td headers="Abbreviation stub_1_5 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Abbreviation</td>
 <td headers="Abbreviation stub_1_5 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
-<p>CARDIO</p>
+<p>INJ</p>
+</div></td>
+</tr>
+<tr class="gt_row_group_first">
+<td headers="Limitations stub_1_6 stub_1" rowspan="1" class="gt_row gt_left gt_stub_row_group" style="background-color: #B0E0E6; font-weight: bold; border-left-width: 3px; border-left-style: solid; border-left-color: powderblue; border-right-width: 3px; border-right-style: solid; border-right-color: powderblue; border-top-width: 3px; border-top-style: solid; border-top-color: powderblue; border-bottom-width: 3px; border-bottom-style: solid; border-bottom-color: powderblue;">Limitations</td>
+<td headers="Limitations stub_1_6 value" class="gt_row gt_left" style="font-family: 'Fira Code';"><div class="gt_from_md">
+<p>Pediatric (Ages 0-17)</p>
 </div></td>
 </tr>
 </tbody></table>
