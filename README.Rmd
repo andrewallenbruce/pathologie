@@ -38,7 +38,7 @@ library(dplyr)
 
 
 ```{r}
-icd10cm(code = c("I10", "I15.0")) |> 
+icd10cm(icd = c("I10", "I15.0")) |> 
   glimpse()
 ```
 

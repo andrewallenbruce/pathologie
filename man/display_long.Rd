@@ -9,10 +9,10 @@ display_long(df, cols = dplyr::everything())
 \arguments{
 \item{df}{\verb{<data.frame>}}
 
-\item{cols}{\verb{<chr>} vector of columns to pivot long, default is \code{\link[dplyr:reexports]{dplyr::everything()}}}
+\item{cols}{\verb{<syms>} vector of bare column name to pivot, default is \code{\link[dplyr:reexports]{dplyr::everything()}}}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} of the pivoted data frame.
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Pivot data frame to long format for easy printing

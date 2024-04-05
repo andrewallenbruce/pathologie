@@ -1,5 +1,18 @@
 #' Search in data frame
-#' @noRd
+#'
+#' @template args-df
+#'
+#' @param dfcol `<sym>` unquoted column to search, in the form of `df$col`
+#'
+#' @param search `<chr>` vector of strings to search for in `df$col`
+#'
+#' @template returns
+#'
+#' @keywords internal
+#'
+#' @autoglobal
+#'
+#' @export
 search_in <- function(df, dfcol, search) {
   vctrs::vec_slice(
     df,
@@ -13,15 +26,24 @@ search_in <- function(df, dfcol, search) {
 }
 
 #' Return GitHub raw url
+#'
 #' @noRd
 gh_raw <- function(x) {
   paste0("https://raw.githubusercontent.com/", x)
 }
 
 #' Mount [pins][pins::pins-package] board
-#' @param source `"local"` or `"remote"`
-#' @return `<pins_board_folder>` if `source = "local"` or `<pins_board_url>` if `source = "remote"`
-#' @noRd
+#'
+#' @param `<chr>` string; whether source is `"local"` or `"remote"`
+#'
+#' @returns `<pins_board_folder>` if `source = "local"` or `<pins_board_url>`
+#'    if `source = "remote"`
+#'
+#' @keywords internal
+#'
+#' @autoglobal
+#'
+#' @export
 mount_board <- function(source = c("local", "remote")) {
 
   source <- match.arg(source)
@@ -36,13 +58,20 @@ mount_board <- function(source = c("local", "remote")) {
 }
 
 #' Pivot data frame to long format for easy printing
-#' @param df `<data.frame>`
-#' @param cols `<chr>` vector of columns to pivot long, default is [dplyr::everything()]
-#' @return A [tibble][tibble::tibble-package] of the pivoted data frame.
-#' @autoglobal
-#' @export
+#'
+#' @template args-df
+#'
+#' @param cols `<syms>` vector of bare column name to pivot, default is [dplyr::everything()]
+#'
+#' @template returns
+#'
 #' @keywords internal
-display_long <- function(df, cols = dplyr::everything()) {
+#'
+#' @autoglobal
+#'
+#' @export
+display_long <- function(df,
+                         cols = dplyr::everything()) {
 
   df |> dplyr::mutate(
     dplyr::across(
@@ -51,21 +80,30 @@ display_long <- function(df, cols = dplyr::everything()) {
 }
 
 #' gt Theme
-#' @param gt_tbl description
-#' @param lbl description
-#' @param tablign description
-#' @param tabsize description
-#' @param tabwt description
-#' @return description
-#' @export
+#'
+#' @param tbl `<gt_tbl>` object
+#'
+#' @param lbl `<lgl>` hide column labels; default is `TRUE`
+#'
+#' @param tablign `<chr>` table stub alignment; default is `"center"`
+#'
+#' @param tabsize `<int>` table stub font size in pixels; default is `16`
+#'
+#' @param tabwt `<chr>` table stub font weight; default is `"normal"`
+#'
+#' @template returns
+#'
 #' @keywords internal
+#'
 #' @autoglobal
-gt_style <- function(gt_tbl,
-                     lbl = TRUE,
+#'
+#' @export
+gt_style <- function(tbl,
+                     lbl     = TRUE,
                      tablign = "center",
                      tabsize = 16,
-                     tabwt = "normal") {
-  gt_tbl |>
+                     tabwt   = "normal") {
+  tbl |>
     # gt::fmt_markdown() |>
     gt::cols_align("left") |>
     gt::opt_table_font(
@@ -91,15 +129,21 @@ gt_style <- function(gt_tbl,
 }
 
 #' gt Marks
-#' @param gt_tbl description
-#' @param cols description
-#' @return description
-#' @export
+#'
+#' @param tbl `<gt_tbl>` object
+#'
+#' @param cols `<syms>` vector of bare column names, e.g. `c(mdc, drg)`
+#'
+#' @template returns
+#'
 #' @keywords internal
+#'
 #' @autoglobal
-gt_marks <- function(gt_tbl, cols) {
+#'
+#' @export
+gt_marks <- function(tbl, cols) {
 
-  gt_tbl |>
+  tbl |>
     gt::text_case_when(
       x == TRUE ~ gt::html(
         fontawesome::fa("check",
@@ -112,4 +156,17 @@ gt_marks <- function(gt_tbl, cols) {
       .default = NA,
       .locations = gt::cells_body(
         columns = {{ cols }}))
+}
+
+#' Example data set
+#'
+#' @template returns
+#'
+#' @keywords internal
+#'
+#' @autoglobal
+#'
+#' @export
+ex_data <- function() {
+  pins::pin_read(pathologie::mount_board(), "exdata")
 }

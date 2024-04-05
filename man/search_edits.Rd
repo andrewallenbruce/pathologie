@@ -2,7 +2,7 @@
 % Please edit documentation in R/icd_edits.R
 \name{search_edits}
 \alias{search_edits}
-\title{Search ICD-10-CM Code Edits}
+\title{ICD-10-CM Code Edits}
 \usage{
 search_edits(icd = NULL, ...)
 }
@@ -20,14 +20,9 @@ Definitions of Medicare Code Edits, version 41.1
 \details{
 FY 2024 – Version 41.1 (Effective April 1, 2024 through September 30, 2024)
 
-The ICD-10 Definitions of Medicare Code Edits file contains the following: A
+The \strong{ICD-10 Definitions of Medicare Code Edits} file contains the following: A
 description of each coding edit with the corresponding code lists as well as
-all the edits and the code lists effective for FY 2024. Zip file contains a
-PDF and text file that is 508 compliant.
-
-A zip file with the ICD-10 MS DRG Definitions Manual (Text Version) contains
-the complete documentation of the ICD-10 MS-DRG Grouper logic. - Updated
-03/12/2024
+all the edits and the code lists effective for FY 2024.
 }
 \examples{
 search_edits(c("Q96.8", "N47.0", "R45.4", "A33"))

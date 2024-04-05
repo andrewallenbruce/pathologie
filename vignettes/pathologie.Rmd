@@ -33,15 +33,16 @@ library(pathologie)
 
 ```{r}
 icd10cm(icd = "T76.02XA") |> 
-  mutate(Chapter = paste0("* ", chapter_name, " \n ", "* Range: [", chapter_range, "]"),
-         Section = paste0("* ", section_name, " \n ", "* Range: [", section_range, "]")
+  mutate(Chapter = paste0("* ", icd_ch_name, " \n ", "* Range: [", icd_ch_range, "]"),
+         Section = paste0("* ", icd_sec_name, " \n ", "* Range: [", icd_sec_range, "]")
          ) |>
-  select("ICD-10-Code"   = code, 
-         Description     = description, 
+  select("ICD-10-Code"   = icd_code, 
+         Description     = icd_description, 
          Chapter,
          Section,
-         Abbreviation    = abb,
-         Limitations     = category) |> 
+         Abbreviation    = icd_ch_abb,
+         "Conflict Group" = icd_conflict_group,
+         "Conflict Rule"  = icd_conflict_rule) |> 
   display_long() |>
   gt(groupname_col       = "name", 
      row_group_as_column = TRUE) |>

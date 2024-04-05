@@ -4,27 +4,21 @@
 \alias{gt_style}
 \title{gt Theme}
 \usage{
-gt_style(
-  gt_tbl,
-  lbl = TRUE,
-  tablign = "center",
-  tabsize = 16,
-  tabwt = "normal"
-)
+gt_style(tbl, lbl = TRUE, tablign = "center", tabsize = 16, tabwt = "normal")
 }
 \arguments{
-\item{gt_tbl}{description}
+\item{tbl}{\verb{<gt_tbl>} object}
 
-\item{lbl}{description}
+\item{lbl}{\verb{<lgl>} hide column labels; default is \code{TRUE}}
 
-\item{tablign}{description}
+\item{tablign}{\verb{<chr>} table stub alignment; default is \code{"center"}}
 
-\item{tabsize}{description}
+\item{tabsize}{\verb{<int>} table stub font size in pixels; default is \code{16}}
 
-\item{tabwt}{description}
+\item{tabwt}{\verb{<chr>} table stub font weight; default is \code{"normal"}}
 }
 \value{
-description
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 gt Theme

@@ -4,15 +4,15 @@
 \alias{gt_marks}
 \title{gt Marks}
 \usage{
-gt_marks(gt_tbl, cols)
+gt_marks(tbl, cols)
 }
 \arguments{
-\item{gt_tbl}{description}
+\item{tbl}{\verb{<gt_tbl>} object}
 
-\item{cols}{description}
+\item{cols}{\verb{<syms>} vector of bare column names, e.g. \code{c(mdc, drg)}}
 }
 \value{
-description
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 gt Marks

@@ -25,20 +25,20 @@ library(dplyr)
 ```
 
 ``` r
-icd10cm(code = c("I10", "I15.0")) |> 
+icd10cm(icd = c("I10", "I15.0")) |> 
   glimpse()
 #> Rows: 2
 #> Columns: 10
-#> $ ch            <int> 9, 9
-#> $ abb           <chr> "CARDIO", "CARDIO"
-#> $ chapter_name  <chr> "Diseases of the circulatory system", "Diseases of the c…
-#> $ chapter_range <chr> "I00 - I99", "I00 - I99"
-#> $ section_name  <chr> "Other rheumatic heart diseases", "Secondary hypertensio…
-#> $ section_range <chr> "I09 - I10", "I15 - I15.9"
-#> $ order         <int> 11397, 11411
-#> $ valid         <int> 1, 1
-#> $ code          <chr> "I10", "I15.0"
-#> $ description   <chr> "Essential (primary) hypertension", "Renovascular hypert…
+#> $ icd_ch_no       <int> 9, 9
+#> $ icd_ch_abb      <chr> "CARDIO", "CARDIO"
+#> $ icd_ch_name     <chr> "Diseases of the circulatory system", "Diseases of the…
+#> $ icd_ch_range    <chr> "I00 - I99", "I00 - I99"
+#> $ icd_sec_name    <chr> "Other rheumatic heart diseases", "Secondary hypertens…
+#> $ icd_sec_range   <chr> "I09 - I10", "I15 - I15.9"
+#> $ order           <int> 11397, 11411
+#> $ valid           <int> 1, 1
+#> $ icd_code        <chr> "I10", "I15.0"
+#> $ icd_description <chr> "Essential (primary) hypertension", "Renovascular hype…
 ```
 
 ``` r
