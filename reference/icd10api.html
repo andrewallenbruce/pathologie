@@ -58,9 +58,9 @@ Medicine's ICD-10-CM API by code or associated term.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">icd10api</span><span class="op">(</span></span>
-<span>  code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  icd_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  term <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="st">"code"</span><span class="op">)</span>,</span>
+<span>  field <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"code"</span>, <span class="st">"both"</span><span class="op">)</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">500L</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -72,20 +72,22 @@ Medicine's ICD-10-CM API by code or associated term.</p>
     </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>code</dt>
-<dd><p><code>&lt;chr&gt;</code> ICD-10-CM code</p></dd>
+    <dl><dt>icd_code</dt>
+<dd><p><code>&lt;chr&gt;</code> ICD-10-CM code containing 3 to 7 characters, excluding
+the dot</p></dd>
 
 
 <dt>term</dt>
-<dd><p><code>&lt;chr&gt;</code> Associated term describing an ICD-10 code</p></dd>
+<dd><p><code>&lt;chr&gt;</code> Associated term describing an ICD-10-CM code</p></dd>
 
 
 <dt>field</dt>
-<dd><p><code>&lt;chr&gt;</code> <code>code</code> or <code>both</code>; default is <code>both</code></p></dd>
+<dd><p><code>&lt;chr&gt;</code> <code>code</code> or <code>both</code>; default is <code>code</code></p></dd>
 
 
 <dt>limit</dt>
-<dd><p><code>&lt;int&gt;</code> API limit, defaults to 500</p></dd>
+<dd><p><code>&lt;int&gt;</code> API limit, defaults to <code>500</code>. Note that the current
+limit on the total number of results that can be retrieved is 7,500.</p></dd>
 
 
 <dt>...</dt>
@@ -103,8 +105,8 @@ Medicine's ICD-10-CM API by code or associated term.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>ICD-10-CM (International Classification of Diseases, 10th Revision,
-Clinical Modification) is a medical coding system for classifying
-diagnoses and reasons for visits in U.S. health care settings.</p><div class="section">
+Clinical Modification) is a medical coding system for classifying diagnoses
+and reasons for visits in U.S. health care settings.</p><div class="section">
 <h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
 
 <ul><li><p><a href="https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html" class="external-link">NIH NLM Clinical Table Service ICD-10-CM API</a></p></li>
@@ -119,40 +121,39 @@ diagnoses and reasons for visits in U.S. health care settings.</p><div class="se
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Returns the seven codes</span></span></span>
-<span class="r-in"><span><span class="co"># beginning with "A15"</span></span></span>
-<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>code <span class="op">=</span> <span class="st">"A15"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Returns the seven codes beginning with `A15`</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>icd_code <span class="op">=</span> <span class="st">"A15"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   code  description                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A15.0 Tuberculosis of lung                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.4 Tuberculosis of intrathoracic lymph nodes   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A15.5 Tuberculosis of larynx, trachea and bronchus</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A15.6 Tuberculous pleurisy                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> A15.7 Primary respiratory tuberculosis            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> A15.8 Other respiratory tuberculosis              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> A15.9 Respiratory tuberculosis unspecified        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   icd_code icd_description                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A15.0    Tuberculosis of lung                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.4    Tuberculosis of intrathoracic lymph nodes   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A15.5    Tuberculosis of larynx, trachea and bronchus</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A15.6    Tuberculous pleurisy                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> A15.7    Primary respiratory tuberculosis            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> A15.8    Other respiratory tuberculosis              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> A15.9    Respiratory tuberculosis unspecified        </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Returns the first five codes</span></span></span>
 <span class="r-in"><span><span class="co"># associated with tuberculosis</span></span></span>
-<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>term <span class="op">=</span> <span class="st">"tuber"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>term <span class="op">=</span> <span class="st">"tuber"</span>, field <span class="op">=</span> <span class="st">"both"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   code  description                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A15.0 Tuberculosis of lung                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.4 Tuberculosis of intrathoracic lymph nodes   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A15.5 Tuberculosis of larynx, trachea and bronchus</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A15.6 Tuberculous pleurisy                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> A15.7 Primary respiratory tuberculosis            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   icd_code icd_description                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A15.0    Tuberculosis of lung                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.4    Tuberculosis of intrathoracic lymph nodes   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A15.5    Tuberculosis of larynx, trachea and bronchus</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A15.6    Tuberculous pleurisy                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> A15.7    Primary respiratory tuberculosis            </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Returns the two codes</span></span></span>
 <span class="r-in"><span><span class="co"># associated with pleurisy</span></span></span>
-<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>term <span class="op">=</span> <span class="st">"pleurisy"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>term <span class="op">=</span> <span class="st">"pleurisy"</span>, field <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   code  description         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> R09.1 Pleurisy            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.6 Tuberculous pleurisy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   icd_code icd_description     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> R09.1    Pleurisy            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A15.6    Tuberculous pleurisy</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># If you're searching for codes beginning</span></span></span>
 <span class="r-in"><span><span class="co"># with a certain letter, you must set the</span></span></span>
@@ -160,26 +161,32 @@ diagnoses and reasons for visits in U.S. health care settings.</p><div class="se
 <span class="r-in"><span><span class="co"># search for terms as well:</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Returns terms containing the letter "Z"</span></span></span>
-<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>code <span class="op">=</span> <span class="st">"z"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>icd_code <span class="op">=</span> <span class="st">"z"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   code  description                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A28.8 Other specified zoonotic bacterial diseases, not elsewhere classified</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A28.9 Zoonotic bacterial disease, unspecified                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A92.5 Zika virus disease                                                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> B02.0 Zoster encephalitis                                                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> B02.1 Zoster meningitis                                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   icd_code icd_description                                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Z00.00   Encounter for general adult medical examination without abnormal fin…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Z00.01   Encounter for general adult medical examination with abnormal findin…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Z00.110  Health examination for newborn under 8 days old                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Z00.111  Health examination for newborn 8 to 28 days old                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Z00.121  Encounter for routine child health examination with abnormal findings</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Returns codes beginning with "Z"</span></span></span>
-<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>code <span class="op">=</span> <span class="st">"z"</span>, field <span class="op">=</span> <span class="st">"code"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">icd10api</span><span class="op">(</span>icd_code <span class="op">=</span> <span class="st">"z"</span>, field <span class="op">=</span> <span class="st">"code"</span>, limit <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   code    description                                                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Z00.00  Encounter for general adult medical examination without abnormal find…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Z00.01  Encounter for general adult medical examination with abnormal findings</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Z00.110 Health examination for newborn under 8 days old                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Z00.111 Health examination for newborn 8 to 28 days old                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Z00.121 Encounter for routine child health examination with abnormal findings </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   icd_code icd_description                                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Z00.00   Encounter for general adult medical examination without abnormal fin…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Z00.01   Encounter for general adult medical examination with abnormal findin…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Z00.110  Health examination for newborn under 8 days old                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Z00.111  Health examination for newborn 8 to 28 days old                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Z00.121  Encounter for routine child health examination with abnormal findings</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Will error if results exceed API limit</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">icd10api</span><span class="op">(</span>icd_code <span class="op">=</span> <span class="st">"I"</span>, field <span class="op">=</span> <span class="st">"both"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in icd10api(icd_code = "I", field = "both") : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Your search returned <span style="color: #0000BB; font-weight: bold;">36770</span> results.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> The NLM ICD-10-CM API limit is <span style="font-weight: bold; font-style: italic;">7,500</span>.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
