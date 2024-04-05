@@ -1,6 +1,6 @@
 Package: pathologie
 Title: Tidy ICD-10-CM Tools
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Andrew", "Bruce", , "andrew.bruce@northstarrevenueintegrity.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrew.bruce@northstarrevenueintegrity.com>
