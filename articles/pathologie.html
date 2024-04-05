@@ -83,7 +83,7 @@
 <h2 id="icd-10-cm">ICD-10-CM<a class="anchor" aria-label="anchor" href="#icd-10-cm"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"T76.02XA"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>icd <span class="op">=</span> <span class="st">"T76.02XA"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Chapter <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">chapter_name</span>, <span class="st">" \n "</span>, <span class="st">"* Range: ["</span>, <span class="va">chapter_range</span>, <span class="st">"]"</span><span class="op">)</span>,</span>
 <span>         Section <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* "</span>, <span class="va">section_name</span>, <span class="st">" \n "</span>, <span class="st">"* Range: ["</span>, <span class="va">section_range</span>, <span class="st">"]"</span><span class="op">)</span></span>
 <span>         <span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -116,9 +116,9 @@
 <span>      <span class="op">)</span>,</span>
 <span>    locations            <span class="op">=</span> <span class="fu">cells_row_groups</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `mutate()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `Section = paste0(...)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `Chapter = paste0(...)`.</span></span>
 <span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'section_name' not found</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'chapter_name' not found</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="the-nlms-icd-10-cm-api">The NLM’s ICD-10-CM API<a class="anchor" aria-label="anchor" href="#the-nlms-icd-10-cm-api"></a>

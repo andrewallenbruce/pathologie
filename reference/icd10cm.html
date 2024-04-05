@@ -48,7 +48,7 @@ diagnoses and reasons for visits in U.S. health care settings."><!-- mathjax -->
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>ICD-10-CM Codes</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/pathologie/blob/HEAD/R/icd_pin.R" class="external-link"><code>R/icd_pin.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/pathologie/blob/HEAD/R/icd_10_cm.R" class="external-link"><code>R/icd_10_cm.R</code></a></small>
       <div class="d-none name"><code>icd10cm.Rd</code></div>
     </div>
 
@@ -85,22 +85,22 @@ diagnoses and reasons for visits in U.S. health care settings.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">icd10cm</span><span class="op">(</span></span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F50.8"</span>, <span class="st">"G40.311"</span>, <span class="st">"Q96.8"</span>,</span></span>
-<span class="r-in"><span>     <span class="st">"Z62.890"</span>, <span class="st">"R45.4"</span>, <span class="st">"E06.3"</span>,</span></span>
-<span class="r-in"><span>     <span class="st">"H00.019"</span>, <span class="st">"D50.1"</span>, <span class="st">"C4A.70"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      ch abb   chapter_name  chapter_range section_name section_range order valid</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     2 ONC   Neoplasms     C00 - D49     Merkel cell… C4A - C4A.9    <span style="text-decoration: underline;">1</span>599     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     3 BLOOD Diseases of … D50 - D89     Iron defici… D50 - D50.9    <span style="text-decoration: underline;">3</span>421     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     4 METAB Endocrine, n… E00 - E89     Thyroiditis  E06 - E06.9    <span style="text-decoration: underline;">3</span>868     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     5 PSYCH Mental, beha… F01 - F99     Eating diso… F50 - F50.9    <span style="text-decoration: underline;">5</span>946     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>     6 NEURO Diseases of … G00 - G99     Epilepsy an… G40 - G40.919  <span style="text-decoration: underline;">6</span>329     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>     7 EYE   Diseases of … H00 - H59     Hordeolum a… H00 - H00.19   <span style="text-decoration: underline;">7</span>045     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>    17 CONG  Congenital m… Q00 - Q99     Turner's sy… Q96 - Q96.9   <span style="text-decoration: underline;">30</span>028     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span>    18 SYMP  Symptoms, si… R00 - R99     Symptoms an… R45 - R45.89  <span style="text-decoration: underline;">30</span>559     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span>    21 STAT  Factors infl… Z00 - Z99     Problems re… Z62 - Z62.9   <span style="text-decoration: underline;">96</span>381     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: code &lt;chr&gt;, description &lt;chr&gt;, category &lt;chr&gt;</span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"F50.8"</span>, <span class="st">"G40.311"</span>, <span class="st">"Q96.8"</span>, <span class="st">"Z62.890"</span>, <span class="st">"R45.4"</span>, <span class="st">"E06.3"</span>, <span class="st">"H00.019"</span>, <span class="st">"D50.1"</span>, <span class="st">"C4A.70"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>   <span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   icd_ch_no icd_ch_abb icd_ch_name icd_ch_range icd_sec_name icd_sec_range order</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         2 ONC        Neoplasms   C00 - D49    Merkel cell… C4A - C4A.9    <span style="text-decoration: underline;">1</span>599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>         3 BLOOD      Diseases o… D50 - D89    Iron defici… D50 - D50.9    <span style="text-decoration: underline;">3</span>421</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>         4 METAB      Endocrine,… E00 - E89    Thyroiditis  E06 - E06.9    <span style="text-decoration: underline;">3</span>868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>         5 PSYCH      Mental, be… F01 - F99    Eating diso… F50 - F50.9    <span style="text-decoration: underline;">5</span>946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>         6 NEURO      Diseases o… G00 - G99    Epilepsy an… G40 - G40.919  <span style="text-decoration: underline;">6</span>329</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>         7 EYE        Diseases o… H00 - H59    Hordeolum a… H00 - H00.19   <span style="text-decoration: underline;">7</span>045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>        17 CONG       Congenital… Q00 - Q99    Turner's sy… Q96 - Q96.9   <span style="text-decoration: underline;">30</span>028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span>        18 SYMP       Symptoms, … R00 - R99    Symptoms an… R45 - R45.89  <span style="text-decoration: underline;">30</span>559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span>        21 STAT       Factors in… Z00 - Z99    Problems re… Z62 - Z62.9   <span style="text-decoration: underline;">96</span>381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: valid &lt;int&gt;, icd_code &lt;chr&gt;, icd_description &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   icd_conflict_group &lt;chr&gt;, icd_conflict_rule &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
