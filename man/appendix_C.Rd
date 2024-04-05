@@ -7,7 +7,7 @@
 appendix_C()
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Appendix C is a list of all of the codes that are defined as either a

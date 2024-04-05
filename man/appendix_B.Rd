@@ -7,7 +7,7 @@
 appendix_B()
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 The Diagnosis Code/MDC/MS-DRG Index lists each diagnosis code, as well as

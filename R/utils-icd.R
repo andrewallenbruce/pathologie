@@ -127,7 +127,7 @@ icd10_chapter_regex <- function() {
 #' add_dot("F32")  # no dot added if code is only 3-digits
 add_dot <- function(x) {
 
-  stopifnot(!stringr::str_detect(x, stringr::fixed(".")))
+  # stopifnot(!stringr::str_detect(x, stringr::fixed(".")))
 
   ifelse(stringr::str_length(x) > 3,
          gsub("^(.{3})(.*)$", paste0("\\1.\\2"), x),

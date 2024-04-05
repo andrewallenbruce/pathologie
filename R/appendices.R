@@ -6,15 +6,15 @@
 #' an MDC specified. The letter M is used to designate a medical MS-DRG and the
 #' letter P is used to designate a surgical MS-DRG.
 #'
-#' @param drg `<chr>` vector of 3-digit DRG codes
+#' @template args-drg
 #'
-#' @param mdc `<chr>` vector of 2-digit Major Diagnostic Category codes
+#' @template args-mdc
 #'
 #' @param type `<chr>` DRG type: `M` (Medical) or `P` (Surgical)
 #'
-#' @param ... Empty
+#' @template args-dots
 #'
-#' @return A [tibble][tibble::tibble-package]
+#' @template returns
 #'
 #' @examplesIf interactive()
 #' appendix_A(drg = "011")
@@ -29,15 +29,15 @@ appendix_A <- function(drg  = NULL,
                        type = NULL,
                        ...) {
 
-  ms <- pins::pin_read(mount_board(), "msdrg_41.1")
+  msd <- pins::pin_read(mount_board(), "msdrg_41.1")
 
-  if (!is.null(type)) {ms <- vctrs::vec_slice(ms, ms$ms == type)}
+  if (!is.null(type)) {msd <- vctrs::vec_slice(msd, msd$drg_type == type)}
 
-  if (!is.null(drg)) {ms <- search_in(ms, ms$drg, drg)}
+  if (!is.null(drg)) {msd <- search_in(msd, msd$drg, drg)}
 
-  if (!is.null(mdc)) {ms <- search_in(ms, ms$mdc, mdc)}
+  if (!is.null(mdc)) {msd <- search_in(msd, msd$mdc, mdc)}
 
-  return(ms)
+  return(msd)
 }
 
 #' Appendix B: Diagnosis Code/MDC/MS-DRG Index
@@ -46,7 +46,7 @@ appendix_A <- function(drg  = NULL,
 #' the MDC, and the MS-DRGs to which the diagnosis is used to define the logic
 #' of the DRG either as a principal or secondary diagnosis.
 #'
-#' @return A [tibble][tibble::tibble-package]
+#' @template returns
 #'
 #' @examplesIf interactive()
 #' appendix_B()
@@ -77,7 +77,7 @@ appendix_B <- function() {
 #' diagnosis and grouped to one of the listed DRGs the diagnosis is excluded from
 #' acting as a CC/MCC for severity in DRG assignment.
 #'
-#' @return A [tibble][tibble::tibble-package]
+#' @template returns
 #'
 #' @examplesIf interactive()
 #' appendix_C()

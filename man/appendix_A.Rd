@@ -7,16 +7,16 @@
 appendix_A(drg = NULL, mdc = NULL, type = NULL, ...)
 }
 \arguments{
-\item{drg}{\verb{<chr>} vector of 3-digit DRG codes}
+\item{drg}{\verb{<chr>} vector of 3-digit Diagnosis-Related Group codes}
 
 \item{mdc}{\verb{<chr>} vector of 2-digit Major Diagnostic Category codes}
 
 \item{type}{\verb{<chr>} DRG type: \code{M} (Medical) or \code{P} (Surgical)}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Appendix A contains a list of each MS-DRG with a specification of the MDC and

@@ -7,9 +7,10 @@
 # letter P is used to designate a surgical MS-DRG.
 
 library(tidyverse)
+path <- "C:/Users/Andrew/Desktop/payer_guidelines/data/MSDRG/MSDRGv41.1ICD10_R0_DefinitionsManual_TEXT_0/appendix_A.txt"
 
 appendixA <- readr::read_fwf(
-    "data-raw/MSDRGv41.1ICD10_R0_DefinitionsManual_TEXT_0/appendix_A.txt",
+  path,
     skip_empty_rows = TRUE,
     skip = 10
   ) |>
@@ -17,10 +18,10 @@ appendixA <- readr::read_fwf(
   janitor::clean_names() |>
   janitor::remove_empty(which = c("cols", "rows"))
 
-names(appendixA) <- c("drg", "mdc", "ms", "description", "col1", "col2")
+names(appendixA) <- c("drg", "mdc", "drg_abb", "drg_description", "col1", "col2")
 
 appendixA <- appendixA |>
-  dplyr::select(drg, mdc, ms, description)
+  dplyr::select(drg, mdc, drg_abb, drg_description)
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))

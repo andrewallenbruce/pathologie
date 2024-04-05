@@ -17,66 +17,64 @@
 # diagnosis and grouped to one of the listed DRGs the diagnosis is excluded from
 # acting as a CC/MCC for severity in DRG assignment.
 
-appendixC <- readr::read_fwf(
-  "data-raw/MSDRGv41.1ICD10_R0_DefinitionsManual_TEXT_0/appendix_C.txt",
-  skip = 17
-) |>
-  janitor::row_to_names(1) |>
-  janitor::clean_names() |>
-  dplyr::select(
-    code = i10_dx,
-    level = lev,
-    pdx_exclusions,
-    code_description = icd_10_cm_description
-  ) |>
-  dplyr::mutate(row = dplyr::row_number())
+path_c11 <- "C:/Users/Andrew/Desktop/payer_guidelines/data/MSDRG/MSDRGv41.1ICD10_R0_DefinitionsManual_TEXT_0/appendix_C_1_1.txt"
 
-pdx_rows <- appendixC |>
-  dplyr::filter(is.na(code)) |>
+appendix_c11 <- readr::read_fwf(
+  path_c11,
+  readr::fwf_cols(
+    icd_code = c(1, 7),
+    cc_mcc = c(9, 12),
+    pdx_group = c(14, sum(14 + 5)),
+    icd_description = c(31, 500)
+  )
+) |>
+  tidyr::separate_wider_delim(
+    cols = pdx_group,
+    delim = ":",
+    names = c("pdx_group", "delete"),
+    too_few = "align_start"
+  ) |>
+  dplyr::mutate(icd_code = pathologie::add_dot(icd_code)) |>
+  dplyr::select(-c(delete, icd_description))
+
+
+path_c12 <- "C:/Users/Andrew/Desktop/payer_guidelines/data/MSDRG/MSDRGv41.1ICD10_R0_DefinitionsManual_TEXT_0/appendix_C_1_2.txt"
+
+appendix_c12 <- readr::read_table(path_c12, col_names = FALSE) |>
+  dplyr::mutate(row = dplyr::row_number(), .before = 1) |>
+  dplyr::select(-X2)
+
+pdx_rows <- appendix_c12 |>
+  dplyr::filter(X1 == "PDX") |>
   dplyr::pull(row)
 
-pdx_rows <- pdx_rows + 1
-
-pdx_groups <- appendixC |>
+pdx_groups <- appendix_c12 |>
   dplyr::slice(pdx_rows) |>
-  dplyr::select(-code_description) |>
-  dplyr::mutate(
-    start = row + 1,
-    end = dplyr::lead(row) - 2,
-    pdx_collection = stringr::str_remove(
-      pdx_exclusions, stringr::fixed("n "))
-  ) |>
-  dplyr::select(pdx_collection, start, end)
+  dplyr::mutate(start = row + 1,
+                end = dplyr::lead(row) - 1) |>
+  dplyr::select(pdx_group = X3,
+                start,
+                end)
 
-appendixC_pdx <- appendixC |>
-  dplyr::slice(18217:dplyr::n()) |>
-  dplyr::mutate(
-    start = row + 1,
-    pdx_collection = stringr::str_remove(pdx_exclusions, stringr::fixed("n "))
-  ) |>
-  dplyr::left_join(pdx_groups, by = dplyr::join_by(start, pdx_collection)) |>
-  dplyr::mutate(
-    pdx_collection = dplyr::if_else(
-      stringr::str_detect(
-        pdx_collection,
-        stringr::regex("[A-Za-z]")),
-    NA_character_, pdx_collection)) |>
-  tidyr::fill(pdx_collection) |>
-  dplyr::filter(!is.na(code)) |>
-  dplyr::filter(is.na(end)) |>
-  dplyr::select(code, pdx_collection)
+appendix_c12 <- appendix_c12 |>
+  dplyr::left_join(pdx_groups, by = dplyr::join_by(row == start)) |>
+  dplyr::filter(X1 != "PDX") |>
+  dplyr::select(pdx_icd = X1, pdx_group) |>
+  tidyr::fill(pdx_group) |>
+  dplyr::mutate(pdx_icd = pathologie::add_dot(pdx_icd))
 
-appendixC <- appendixC |>
-  dplyr::slice(1:18217) |>
-  dplyr::select(-row) |>
-  tidyr::separate_wider_delim(
-    pdx_exclusions, ":",
-    names = c("pdx", "n_codes"),
-    too_few = "align_start")
+
+# |> tidyr::nest(pdx_icd = pdx_icd)
+# appendix_c <- dplyr::left_join(
+#   appendix_c11,
+#   appendix_c12,
+#   by = dplyr::join_by(pdx_group)) |>
+#   tidyr::unnest(pdx_icd) |>
+#   tidyr::nest(pdx_groups = c(pdx_group, pdx_icd))
 
 appendixC <- list(
-  apx_c = appendixC,
-  pdx = appendixC_pdx
+  cc_mcc = appendix_c11,
+  pdx_groups = appendix_c12
 )
 
 # Update Pin
@@ -93,3 +91,31 @@ board |> pins::pin_write(
 )
 
 board |> pins::write_board_manifest()
+
+
+
+# appendixC_pdx <- appendixC |>
+#   dplyr::slice(18217:dplyr::n()) |>
+#   dplyr::mutate(
+#     start = row + 1,
+#     pdx_collection = stringr::str_remove(pdx_exclusions, stringr::fixed("n "))
+#   ) |>
+#   dplyr::left_join(pdx_groups, by = dplyr::join_by(start, pdx_collection)) |>
+#   dplyr::mutate(
+#     pdx_collection = dplyr::if_else(
+#       stringr::str_detect(
+#         pdx_collection,
+#         stringr::regex("[A-Za-z]")),
+#     NA_character_, pdx_collection)) |>
+#   tidyr::fill(pdx_collection) |>
+#   dplyr::filter(!is.na(code)) |>
+#   dplyr::filter(is.na(end)) |>
+#   dplyr::select(code, pdx_collection)
+#
+# appendixC <- appendixC |>
+#   dplyr::slice(1:18217) |>
+#   dplyr::select(-row) |>
+#   tidyr::separate_wider_delim(
+#     pdx_exclusions, ":",
+#     names = c("pdx", "n_codes"),
+#     too_few = "align_start")

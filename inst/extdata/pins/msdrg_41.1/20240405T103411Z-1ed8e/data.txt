@@ -1,6 +1,6 @@
 file: msdrg_41.qs
-file_size: 9755
-pin_hash: 558fdae1279316e7
+file_size: 9763
+pin_hash: 1ed8ea63cf30190f
 type: qs
 title: Appendix A List of MS-DRGs Version 41.1
 description:
@@ -11,5 +11,5 @@ description:
 - MS-DRG and the letter P is used to designate a surgical MS-DRG.
 tags: ~
 urls: ~
-created: 20240403T013501Z
+created: 20240405T103411Z
 api_version: 1

@@ -16,13 +16,42 @@ appendixB <- readr::read_fwf(
   dplyr::select(
     icd_code = X1,
     mdc = X2,
-    drg = X3,
-    icd_description = X4
+    drg = X3
+    # , icd_description = X4
   ) |>
-  tidyr::fill(icd_code, icd_description) |>
+  tidyr::fill(icd_code) |>
   dplyr::mutate(icd_code = add_dot(icd_code))
 
-appendixB
+drg_expand <- appendixB |>
+  dplyr::count(drg, sort = TRUE) |>
+  dplyr::select(drg) |>
+  dplyr::filter(stringr::str_detect(drg, "-")) |>
+  tidyr::separate_wider_delim(
+    drg,
+    delim = "-",
+    names = c("start", "end"),
+    cols_remove = FALSE
+  ) |>
+  dplyr::mutate(start = as.integer(start),
+                end = as.integer(end)) |>
+  dplyr::rowwise() |>
+  dplyr::mutate(seq = list(c(start, end)),
+                full = list(tidyr::full_seq(seq, 1))) |>
+  dplyr::select(drg, full) |>
+  tidyr::unnest(full) |>
+  dplyr::mutate(full = stringr::str_pad(as.character(full), width = 3, pad = "0"))
+
+appendixB <- appendixB |>
+  dplyr::left_join(
+    drg_expand,
+    by = c("drg" = "drg"),
+    relationship = "many-to-many") |>
+  dplyr::select(
+    icd_code,
+    mdc,
+    drg_range = drg,
+    drg = full
+  )
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))
