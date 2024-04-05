@@ -32,7 +32,7 @@ library(pathologie)
 # ICD-10-CM
 
 ```{r}
-icd10cm(code = "T76.02XA") |> 
+icd10cm(icd = "T76.02XA") |> 
   mutate(Chapter = paste0("* ", chapter_name, " \n ", "* Range: [", chapter_range, "]"),
          Section = paste0("* ", section_name, " \n ", "* Range: [", section_range, "]")
          ) |>

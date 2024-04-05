@@ -46,29 +46,6 @@ drgs <- curl::multi_download(
   )
 )
 
-# files_in_zip <- fs::dir_info(fs::path("data-raw")) |>
-#   dplyr::select(path) |>
-#   dplyr::filter(stringr::str_detect(path, ".zip")) |>
-#   tibble::deframe() |>
-#   rlang::set_names(basename) |>
-#   purrr::map(zip::zip_list) |>
-#   purrr::list_rbind(names_to = "zipfile") |>
-#   dplyr::mutate(compressed = fs::fs_bytes(compressed_size),
-#                 uncompressed = fs::fs_bytes(uncompressed_size)) |>
-#   dplyr::select(zipfile,
-#                 filename,
-#                 compressed,
-#                 uncompressed) |>
-#   dplyr::tibble() |>
-#   dplyr::filter(stringr::str_detect(filename, ".txt"))
-
-zip::unzip(
-  zipfile = "data-raw/Definitions of Medicare Code Edits_v_41_1.zip",
-  files = "Definitions of Medicare Code Edits_v_41_1.txt",
-  exdir = "data-raw"
-)
-
-# readr::read_table("data-raw/Definitions of Medicare Code Edits_v_41_1.txt", col_names = FALSE)
 path <- "C:/Users/Andrew/Desktop/payer_guidelines/data/MSDRG/Definitions of Medicare Code Edits_v_41_1/Definitions of Medicare Code Edits_v_41_1.txt"
 icddef <- readLines(path)
 
@@ -140,26 +117,26 @@ test <- list(
 # which(icddef == "C. Diagnoses for males only")
 # which(icddef == "7. Non-specific principal diagnosis (discontinued as of 10/01/07)")
 
-code_edits <- tibble::enframe(test,
-                              name = "limitation_category",
-                              value = "icd_code") |>
+code_edits <- tibble::enframe(
+  test,
+  name = "icd_conflict_rule",
+  value = "icd_code") |>
   tidyr::unnest(icd_code) |>
   tidyr::separate_wider_delim(
     icd_code,
     "\t",
     names = c("icd_code", "icd_description"),
     too_few = "align_start") |>
-  # dplyr::mutate(dot = stringr::str_detect(icd_code, stringr::fixed("."))) |>
   dplyr::filter(!is.na(icd_description)) |>
   dplyr::mutate(icd_code = pathologie:::add_dot(icd_code)) |>
   dplyr::select(
-    code = icd_code,
-    description = icd_description,
-    category = limitation_category
+    icd_code,
+    icd_description,
+    icd_conflict_rule
   ) |>
   dplyr::mutate(
-    category = dplyr::case_match(
-      category,
+    icd_conflict_rule = dplyr::case_match(
+      icd_conflict_rule,
       "perinatal_newborn" ~ "Perinatal/Newborn (Age 0 Only)",
       "pediatric"         ~ "Pediatric (Ages 0-17)",
       "maternity"         ~ "Maternity (Ages 9-64)",
@@ -168,16 +145,31 @@ code_edits <- tibble::enframe(test,
       "male"              ~ "Male Only",
       "manifestation"     ~ "Manifestation (Not Allowed as Principal Diagnosis)"
     )
+  ) |>
+  dplyr::mutate(
+    icd_conflict_group = dplyr::case_match(
+      icd_conflict_rule,
+      c(
+        "Perinatal/Newborn (Age 0 Only)",
+        "Pediatric (Ages 0-17)",
+        "Maternity (Ages 9-64)",
+        "Adult (Ages 15-124)"
+      ) ~ "Age",
+      c("Female Only", "Male Only") ~ "Sex",
+      .default = "Other"
+    ),
+    .before = icd_conflict_rule
   )
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |>
-  pins::pin_write(code_edits,
-                  name = "code_edits",
-                  title = "Definitions of Medicare Code Edits v41.1",
-                  description = "ICD-10 Definitions of Medicare Code Edits: Description of each coding edit with corresponding code lists as well as all the edits and the code lists effective for FY 2024.",
-                  type = "qs")
+  pins::pin_write(
+    code_edits,
+    name = "code_edits",
+    title = "Definitions of Medicare Code Edits v41.1",
+    description = "ICD-10 Definitions of Medicare Code Edits: Description of each coding edit with corresponding code lists as well as all the edits and the code lists effective for FY 2024.",
+    type = "qs")
 
 board |> pins::write_board_manifest()

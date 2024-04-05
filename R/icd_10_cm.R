@@ -12,9 +12,8 @@
 #'
 #' @examples
 #' icd10cm(
-#'    c("F50.8", "G40.311", "Q96.8",
-#'      "Z62.890", "R45.4", "E06.3",
-#'      "H00.019", "D50.1", "C4A.70"))
+#'    c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4", "E06.3", "H00.019", "D50.1", "C4A.70")
+#'    )
 #'
 #' @autoglobal
 #'
@@ -26,12 +25,15 @@ icd10cm <- function(icd = NULL,
 
   if (!is.null(icd)) {
 
-    icd10 <- tidyr::unnest(icd10, chapter_sections) |>
-      tidyr::unnest(section_codes)
+    icd10 <- tidyr::unnest(
+      icd10,
+      icd_ch_sec
+      ) |>
+      tidyr::unnest(icd_sec_code)
 
-    icd10 <- search_in(icd10, icd10$code, icd)
+    icd10 <- search_in(icd10, icd10$icd_code, icd)
 
-    edit <- search_edits(code = icd)
+    edit <- search_edits(icd = icd)
 
     if (!vctrs::vec_is_empty(edit)) {
 
@@ -39,8 +41,8 @@ icd10cm <- function(icd = NULL,
         icd10,
         edit,
         by = dplyr::join_by(
-          code,
-          description
+          icd_code,
+          icd_description
           )
         )
     }

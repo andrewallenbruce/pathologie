@@ -30,7 +30,7 @@ search_edits <- function(icd = NULL,
 
   edt <- pins::pin_read(mount_board(), "code_edits")
 
-  if (!is.null(icd)) {edt <- search_in(edt, edt$code, icd)}
+  if (!is.null(icd)) {edt <- search_in(edt, edt$icd_code, icd)}
 
   return(edt)
 }
