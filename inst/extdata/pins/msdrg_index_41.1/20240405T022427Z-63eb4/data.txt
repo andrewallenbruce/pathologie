@@ -1,6 +1,6 @@
 file: msdrg_index_41.qs
-file_size: 469035
-pin_hash: a0f1a61030df1c83
+file_size: 479212
+pin_hash: 63eb41ffa2993ef2
 type: qs
 title: Appendix B Diagnosis Code/MDC/MS-DRG Index 41.1
 description:
@@ -10,5 +10,5 @@ description:
 - the DRG either as a principal or secondary diagnosis.
 tags: ~
 urls: ~
-created: 20240403T020046Z
+created: 20240405T022427Z
 api_version: 1

@@ -1,7 +1,7 @@
-library(rvest)
-library(fs)
-library(curl)
-library(zip)
+# library(rvest)
+# library(fs)
+# library(curl)
+# library(zip)
 library(tidyverse)
 
 # https://www.cms.gov/medicare/payment/prospective-payment-systems/acute-inpatient-pps/ms-drg-classifications-and-software
@@ -69,8 +69,8 @@ zip::unzip(
 )
 
 # readr::read_table("data-raw/Definitions of Medicare Code Edits_v_41_1.txt", col_names = FALSE)
-
-icddef <- readLines("data-raw/Definitions of Medicare Code Edits_v_41_1.txt")
+path <- "C:/Users/Andrew/Desktop/payer_guidelines/data/MSDRG/Definitions of Medicare Code Edits_v_41_1/Definitions of Medicare Code Edits_v_41_1.txt"
+icddef <- readLines(path)
 
 # The Medicare Code Editor detects inconsistencies between a patient’s age and
 # any diagnosis on the patient’s record. For example, a five-year-old patient

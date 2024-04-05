@@ -32,7 +32,7 @@ library(pathologie)
 # ICD-10-CM
 
 ```{r}
-icd10cm(code = "I10") |> 
+icd10cm(code = "T76.02XA") |> 
   mutate(Chapter = paste0("* ", chapter_name, " \n ", "* Range: [", chapter_range, "]"),
          Section = paste0("* ", section_name, " \n ", "* Range: [", section_range, "]")
          ) |>
@@ -40,7 +40,8 @@ icd10cm(code = "I10") |>
          Description     = description, 
          Chapter,
          Section,
-         Abbreviation    = abb) |> 
+         Abbreviation    = abb,
+         Limitations     = category) |> 
   display_long() |>
   gt(groupname_col       = "name", 
      row_group_as_column = TRUE) |>
@@ -112,3 +113,4 @@ While the call below returns only the ICD-10 **codes** containing "Z":
 ```{r}
 icd10api(code = "z", field = "code", limit = 50)
 ```
+

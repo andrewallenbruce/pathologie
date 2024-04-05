@@ -8,8 +8,6 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-<br>
-
 ## :package: Installation
 
 You can install **pathologie** from [GitHub](https://github.com/) with:
@@ -72,7 +70,7 @@ icd10api(code = "I1")
 
 ## :balance_scale: Code of Conduct
 
-Please note that the `pathologie` project is released with a
+Please note that the **`pathologie`** project is released with a
 [Contributor Code of
 Conduct](https://andrewallenbruce.github.io/pathologie/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

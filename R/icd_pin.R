@@ -22,9 +22,13 @@ icd10cm <- function(code = NULL,
     icd <- tidyr::unnest(icd, chapter_sections) |>
       tidyr::unnest(section_codes)
 
-    icd <- vctrs::vec_slice(icd,
-           vctrs::vec_in(icd$code,
-           collapse::funique(code)))
+    icd <- search_in(icd, icd$code, code)
+
+    edit <- search_edits(code = code)
+
+    if (!vctrs::vec_is_empty(edit)) {
+      icd <- dplyr::left_join(icd, edit, by = dplyr::join_by(code, description))
+    }
   }
   return(icd)
 }

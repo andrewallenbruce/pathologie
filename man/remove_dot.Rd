@@ -20,3 +20,4 @@ remove_dot("F32.0")
 
 remove_dot("F32")
 }
+\keyword{internal}

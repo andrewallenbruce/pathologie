@@ -119,6 +119,8 @@ icd10_chapter_regex <- function() {
 #'
 #' @export
 #'
+#' @keywords internal
+#'
 #' @examples
 #' add_dot("F320")
 #'
@@ -142,6 +144,8 @@ add_dot <- function(x) {
 #' @returns A valid ICD-10 code without a dot included
 #'
 #' @export
+#'
+#' @keywords internal
 #'
 #' @examples
 #' remove_dot("F32.0")

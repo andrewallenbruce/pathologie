@@ -6,17 +6,23 @@
 
 library(tidyverse)
 
+path <- "C:/Users/Andrew/Desktop/payer_guidelines/data/MSDRG/MSDRGv41.1ICD10_R0_DefinitionsManual_TEXT_0/appendix_B.txt"
+
 appendixB <- readr::read_fwf(
-  "data-raw/MSDRGv41.1ICD10_R0_DefinitionsManual_TEXT_0/appendix_B.txt",
+  path,
   skip_empty_rows = TRUE,
   skip            = 9
 ) |>
   dplyr::select(
-    code             = X1,
-    mdc              = X2,
-    drg              = X3,
-    code_description = X4
-  )
+    icd_code = X1,
+    mdc = X2,
+    drg = X3,
+    icd_description = X4
+  ) |>
+  tidyr::fill(icd_code, icd_description) |>
+  dplyr::mutate(icd_code = add_dot(icd_code))
+
+appendixB
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))
