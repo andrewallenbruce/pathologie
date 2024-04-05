@@ -18,10 +18,14 @@
 #' receive less reimbursement.
 #'
 #' @param drg `<chr>` vector of 3-digit DRG codes
+#'
 #' @param mdc `<chr>` vector of 2-digit Major Diagnostic Category codes
+#'
 #' @param type `<chr>` DRG type: `Medical` or `Surgical`
-#' @param ... Empty
-#' @return A [tibble][tibble::tibble-package]
+#'
+#' @template args-dots
+#'
+#' @template returns
 #' @examples
 #' search_msdrg(drg = "011")
 #'

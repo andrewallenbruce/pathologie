@@ -4,6 +4,10 @@ utils::globalVariables(c(
   # <icd10cm>
   "chapter_sections",
   # <icd10cm>
+  "code",
+  # <icd10cm>
+  "description",
+  # <icd10cm>
   "section_codes",
   # <icd10api>
   # <.multiple_request>

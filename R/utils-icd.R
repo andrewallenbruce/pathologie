@@ -154,5 +154,3 @@ add_dot <- function(x) {
 remove_dot <- function(x) {
   stringr::str_remove(x, stringr::fixed("."))
 }
-
-# https://github.com/andrewallenbruce/icd10us/blob/master/R/addremove_dot.R

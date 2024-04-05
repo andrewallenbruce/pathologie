@@ -13,11 +13,11 @@
 #' the complete documentation of the ICD-10 MS-DRG Grouper logic. - Updated
 #' 03/12/2024
 #'
-#' @param code `<chr>` vector of ICD-10-CM codes
+#' @template args-icd_code
 #'
-#' @param ... Empty dots
+#' @template args-dots
 #'
-#' @return A [tibble][tibble::tibble-package]
+#' @template returns
 #'
 #' @examples
 #' search_edits(c("Q96.8", "N47.0", "R45.4", "A33"))
@@ -25,12 +25,12 @@
 #' @autoglobal
 #'
 #' @export
-search_edits <- function(code = NULL,
+search_edits <- function(icd = NULL,
                          ...) {
 
   edt <- pins::pin_read(mount_board(), "code_edits")
 
-  if (!is.null(code)) {edt <- search_in(edt, edt$code, code)}
+  if (!is.null(icd)) {edt <- search_in(edt, edt$code, icd)}
 
   return(edt)
 }

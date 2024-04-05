@@ -13,10 +13,10 @@ search_msdrg(drg = NULL, mdc = NULL, type = NULL, ...)
 
 \item{type}{\verb{<chr>} DRG type: \code{Medical} or \code{Surgical}}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 The Medicare Severity Diagnosis-Related Group (MS-DRG) is a classification

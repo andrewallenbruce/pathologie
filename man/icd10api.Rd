@@ -24,10 +24,10 @@ icd10api(
 
 \item{limit}{\verb{<int>} API limit, defaults to 500}
 
-\item{...}{Empty}
+\item{...}{Empty dots}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 \code{\link[=icd10api]{icd10api()}} allows you to search the National Library of
@@ -70,4 +70,5 @@ icd10api(code = "z", limit = 5)
 
 # Returns codes beginning with "Z"
 icd10api(code = "z", field = "code", limit = 5)
+
 }

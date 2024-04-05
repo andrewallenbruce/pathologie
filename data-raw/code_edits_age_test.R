@@ -1,36 +1,52 @@
-age_range <- dplyr::tribble(
-  ~icd_limitation,                  ~start, ~end,
-  "Perinatal/Newborn (Age 0 Only)",  0.0,     0.1,
-  "Pediatric (Ages 0-17)",           0.1,     17,
-  "Maternity (Ages 9-64)",           9,     64,
-  "Adult (Ages 15-124)",            15,    124
-) |>
-  dplyr::mutate(
-    age_range = ivs::iv(start, end),
-    .keep = "unused"
+library(tidyverse)
+library(pathologie)
+library(vctrs)
+
+years_floor <- function(from = lubridate::today() - 1052,
+                        to   = lubridate::today()) {
+  floor(
+    as.double(
+      difftime(
+        to,
+        from,
+        units = "weeks",
+        tz = "UTC"
+        )
+      ) / 52.17857
     )
+}
 
-search_edits() |>
-  dplyr::select(
-    icd = code,
-    icd_description = description,
-    icd_limitation = category) |>
-  dplyr::left_join(
-    age_range,
-    by = "icd_limitation") |>
-  dplyr::count(icd_limitation, age_range, sort = TRUE)
+years_floor()
 
-report <- readr::read_csv("C:/Users/Andrew/Desktop/Repositories/responsive_centers/data/cpt_rpt.csv")
-
-
-edits <- pathologie::search_edits() |>
-  dplyr::select(
-    icd = code,
-    icd_description = description,
-    icd_limitation = category) |>
-  dplyr::left_join(
-    age_range,
-    by = "icd_limitation")
+apply_age_edits <- function(df) {
+  dplyr::mutate(
+    df,
+    conflict = dplyr::if_else(
+      icd_limitation == "Perinatal/Newborn (Age 0 Only)" &
+        age != 0,
+      "Conflict",
+      NA_character_
+    ),
+    conflict = dplyr::if_else(
+      icd_limitation == "Pediatric (Ages 0-17)" &
+        dplyr::between(age, 0, 17) == FALSE,
+      "Conflict",
+      NA_character_
+    ),
+    conflict = dplyr::if_else(
+      icd_limitation == "Maternity (Ages 9-64)" &
+        dplyr::between(age, 9, 64) == FALSE,
+      "Conflict",
+      NA_character_
+    ),
+    conflict = dplyr::if_else(
+      icd_limitation == "Adult (Ages 15-124)" &
+        dplyr::between(age, 15, 124) == FALSE,
+      "Conflict",
+      NA_character_
+    )
+  )
+}
 
 age_icds <- vctrs::vec_c(
   "F53.0",
@@ -46,20 +62,64 @@ age_icds <- vctrs::vec_c(
   "T76.02XA"
 )
 
-age_example <- report |>
-  dplyr::select(
-    dob = patient_dob,
-    dos = cpt_dos,
-    icd = diagnosis) |>
-  tidyr::separate_longer_delim(
-    cols = icd,
-    delim = ",") |>
-  dplyr::filter(icd %in% age_icds)
+file <- "C:/Users/Andrew/Desktop/Repositories/responsive_centers/data/cpt_rpt.csv"
 
-age_example |>
-  dplyr::mutate(age_years = as.numeric(difftime(dos, dob, units = "weeks") / 52)) |>
-  dplyr::left_join(edits, by = dplyr::join_by(icd == icd), relationship = "many-to-many") |>
-  dplyr::mutate(is_between = ivs::iv_between(age_years, age_range),
-                is_includes = ivs::iv_includes(age_range, age_years)) |>
-  dplyr::filter(is_between == TRUE) |>
-  dplyr::pull(type)
+age_example <- readr::read_csv(file, show_col_types = FALSE) |>
+  dplyr::select(
+    dob      = patient_dob,
+    dos      = cpt_dos,
+    icd_code = diagnosis) |>
+  tidyr::separate_longer_delim(
+    cols  = icd_code,
+    delim = ",") |>
+  dplyr::filter(icd_code %in% age_icds)
+
+age_example
+
+edits <- pathologie::search_edits() |>
+  dplyr::select(
+    icd_code        = code,
+    icd_description = description,
+    icd_limitation  = category
+  ) |>
+  dplyr::mutate(
+    icd_conflict = dplyr::case_match(
+      icd_limitation,
+      c(
+        "Perinatal/Newborn (Age 0 Only)",
+        "Pediatric (Ages 0-17)",
+        "Maternity (Ages 9-64)",
+        "Adult (Ages 15-124)"
+      ) ~ "Age",
+      c("Female Only", "Male Only") ~ "Sex",
+      .default = "Other"
+    ),
+    .before = icd_limitation
+  )
+
+edits
+
+age_example_edits <- age_example |>
+  dplyr::mutate(age = years_floor(dob, dos)) |>
+  dplyr::left_join(edits,
+                   by = dplyr::join_by(icd_code),
+                   relationship = "many-to-many") |>
+  dplyr::filter(icd_conflict == "Age") |>
+  apply_age_edits() |>
+  dplyr::select(
+    dob,
+    dos,
+    age,
+    icd_code,
+    # icd_description,
+    icd_limitation,
+    conflict
+  )
+
+age_example_edits
+
+age_example_edits |>
+  dplyr::filter(!is.na(conflict))
+
+pathologie::icd10cm("Z00.00") |>
+  dplyr::glimpse()

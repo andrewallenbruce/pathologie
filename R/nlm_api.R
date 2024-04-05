@@ -12,15 +12,20 @@
 #'  * [Learn more about ICD-10-CM.](http://www.cdc.gov/nchs/icd/icd10cm.htm)
 #'
 #' @note Current Version: ICD-10-CM **2024**
+#'
 #' @source National Library of Medicine/National Institute of Health
 #'
 #' @param code `<chr>` ICD-10-CM code
-#' @param term `<chr>` Associated term describing an ICD-10 code
-#' @param field `<chr>` `code` or `both`; default is `both`
-#' @param limit `<int>` API limit, defaults to 500
-#' @param ... Empty
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @param term `<chr>` Associated term describing an ICD-10 code
+#'
+#' @param field `<chr>` `code` or `both`; default is `both`
+#'
+#' @param limit `<int>` API limit, defaults to 500
+#'
+#' @template args-dots
+#'
+#' @template returns
 #'
 #' @examples
 #' # Returns the seven codes
@@ -45,7 +50,9 @@
 #'
 #' # Returns codes beginning with "Z"
 #' icd10api(code = "z", field = "code", limit = 5)
+#'
 #' @autoglobal
+#'
 #' @export
 icd10api <- function(code  = NULL,
                      term  = NULL,
@@ -53,7 +60,13 @@ icd10api <- function(code  = NULL,
                      limit = 500L,
                      ...) {
 
-  stopifnot("Both `code` and `term` cannot be NULL" = all(!is.null(c(code, term))))
+  stopifnot(
+    "Both `code` and `term` cannot be NULL" = all(
+      !is.null(
+        c(code, term)
+        )
+      )
+    )
 
   args <- stringr::str_c(
     c(code = code,
@@ -84,6 +97,7 @@ icd10api <- function(code  = NULL,
   count <- results[[1]]
 
   if (limit < 500L | count <= 500) {
+
     results <- results[[4]] |>
       as.data.frame() |>
       dplyr::rename(code        = V1,
@@ -95,7 +109,12 @@ icd10api <- function(code  = NULL,
 
     pgs <- 1:round(count / 500) * 500
 
-    res2 <- purrr::map(pgs, \(x) .multiple_request(offset = x, args = args, field = field)) |>
+    res2 <- purrr::map(pgs, \(x) .multiple_request(
+      offset = x,
+      args = args,
+      field = field
+      )
+    ) |>
       purrr::list_rbind()
 
     results <- results[[4]] |>

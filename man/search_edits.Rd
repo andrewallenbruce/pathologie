@@ -4,15 +4,15 @@
 \alias{search_edits}
 \title{Search ICD-10-CM Code Edits}
 \usage{
-search_edits(code = NULL, ...)
+search_edits(icd = NULL, ...)
 }
 \arguments{
-\item{code}{\verb{<chr>} vector of ICD-10-CM codes}
+\item{icd}{\verb{<chr>} vector of ICD-10-CM codes}
 
 \item{...}{Empty dots}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Definitions of Medicare Code Edits, version 41.1
