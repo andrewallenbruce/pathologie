@@ -88,20 +88,20 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/pathologie/">pathologie</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>code <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I10"</span>, <span class="st">"I15.0"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>icd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I10"</span>, <span class="st">"I15.0"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: 2</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ ch            &lt;int&gt; 9, 9</span></span>
-<span><span class="co">#&gt; $ abb           &lt;chr&gt; "CARDIO", "CARDIO"</span></span>
-<span><span class="co">#&gt; $ chapter_name  &lt;chr&gt; "Diseases of the circulatory system", "Diseases of the c…</span></span>
-<span><span class="co">#&gt; $ chapter_range &lt;chr&gt; "I00 - I99", "I00 - I99"</span></span>
-<span><span class="co">#&gt; $ section_name  &lt;chr&gt; "Other rheumatic heart diseases", "Secondary hypertensio…</span></span>
-<span><span class="co">#&gt; $ section_range &lt;chr&gt; "I09 - I10", "I15 - I15.9"</span></span>
-<span><span class="co">#&gt; $ order         &lt;int&gt; 11397, 11411</span></span>
-<span><span class="co">#&gt; $ valid         &lt;int&gt; 1, 1</span></span>
-<span><span class="co">#&gt; $ code          &lt;chr&gt; "I10", "I15.0"</span></span>
-<span><span class="co">#&gt; $ description   &lt;chr&gt; "Essential (primary) hypertension", "Renovascular hypert…</span></span></code></pre></div>
+<span><span class="co">#&gt; $ icd_ch_no       &lt;int&gt; 9, 9</span></span>
+<span><span class="co">#&gt; $ icd_ch_abb      &lt;chr&gt; "CARDIO", "CARDIO"</span></span>
+<span><span class="co">#&gt; $ icd_ch_name     &lt;chr&gt; "Diseases of the circulatory system", "Diseases of the…</span></span>
+<span><span class="co">#&gt; $ icd_ch_range    &lt;chr&gt; "I00 - I99", "I00 - I99"</span></span>
+<span><span class="co">#&gt; $ icd_sec_name    &lt;chr&gt; "Other rheumatic heart diseases", "Secondary hypertens…</span></span>
+<span><span class="co">#&gt; $ icd_sec_range   &lt;chr&gt; "I09 - I10", "I15 - I15.9"</span></span>
+<span><span class="co">#&gt; $ order           &lt;int&gt; 11397, 11411</span></span>
+<span><span class="co">#&gt; $ valid           &lt;int&gt; 1, 1</span></span>
+<span><span class="co">#&gt; $ icd_code        &lt;chr&gt; "I10", "I15.0"</span></span>
+<span><span class="co">#&gt; $ icd_description &lt;chr&gt; "Essential (primary) hypertension", "Renovascular hype…</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/icd10api.html">icd10api</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">"I1"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 18 × 2</span></span>
