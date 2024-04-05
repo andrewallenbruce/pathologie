@@ -8,21 +8,23 @@ National Library of Medicine/National Institute of Health
 }
 \usage{
 icd10api(
-  code = NULL,
+  icd_code = NULL,
   term = NULL,
-  field = c("both", "code"),
+  field = c("code", "both"),
   limit = 500L,
   ...
 )
 }
 \arguments{
-\item{code}{\verb{<chr>} ICD-10-CM code}
+\item{icd_code}{\verb{<chr>} ICD-10-CM code containing 3 to 7 characters, excluding
+the dot}
 
-\item{term}{\verb{<chr>} Associated term describing an ICD-10 code}
+\item{term}{\verb{<chr>} Associated term describing an ICD-10-CM code}
 
-\item{field}{\verb{<chr>} \code{code} or \code{both}; default is \code{both}}
+\item{field}{\verb{<chr>} \code{code} or \code{both}; default is \code{code}}
 
-\item{limit}{\verb{<int>} API limit, defaults to 500}
+\item{limit}{\verb{<int>} API limit, defaults to \code{500}. Note that the current
+limit on the total number of results that can be retrieved is 7,500.}
 
 \item{...}{Empty dots}
 }
@@ -35,8 +37,8 @@ Medicine's ICD-10-CM API by code or associated term.
 }
 \details{
 ICD-10-CM (International Classification of Diseases, 10th Revision,
-Clinical Modification) is a medical coding system for classifying
-diagnoses and reasons for visits in U.S. health care settings.
+Clinical Modification) is a medical coding system for classifying diagnoses
+and reasons for visits in U.S. health care settings.
 \subsection{Links}{
 \itemize{
 \item \href{https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html}{NIH NLM Clinical Table Service ICD-10-CM API}
@@ -48,17 +50,16 @@ diagnoses and reasons for visits in U.S. health care settings.
 Current Version: ICD-10-CM \strong{2024}
 }
 \examples{
-# Returns the seven codes
-# beginning with "A15"
-icd10api(code = "A15")
+# Returns the seven codes beginning with `A15`
+icd10api(icd_code = "A15")
 
 # Returns the first five codes
 # associated with tuberculosis
-icd10api(term = "tuber", limit = 5)
+icd10api(term = "tuber", field = "both", limit = 5)
 
 # Returns the two codes
 # associated with pleurisy
-icd10api(term = "pleurisy")
+icd10api(term = "pleurisy", field = "both")
 
 # If you're searching for codes beginning
 # with a certain letter, you must set the
@@ -66,9 +67,12 @@ icd10api(term = "pleurisy")
 # search for terms as well:
 
 # Returns terms containing the letter "Z"
-icd10api(code = "z", limit = 5)
+icd10api(icd_code = "z", limit = 5)
 
 # Returns codes beginning with "Z"
-icd10api(code = "z", field = "code", limit = 5)
+icd10api(icd_code = "z", field = "code", limit = 5)
+
+# Will error if results exceed API limit
+try(icd10api(icd_code = "I", field = "both"))
 
 }

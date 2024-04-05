@@ -78,19 +78,19 @@ The API allows users to search for codes by code or keyword(term), and returns t
 > Returns the seven ICD-10 codes beginning with `A15`:
 
 ```{r}
-icd10api(code = "A15")
+icd10api(icd_code = "A15")
 ```
 
 > Returns all 344 ICD-10 codes associated with tuberculosis:
 
 ```{r}
-icd10api(term = "tuber")
+icd10api(term = "tuber", field = "both")
 ```
 
 > Returns the two ICD-10 codes associated with pleurisy:
 
 ```{r}
-icd10api(term = "pleurisy")
+icd10api(term = "pleurisy", field = "both")
 ```
 
 ## The `field` Parameter
@@ -104,7 +104,7 @@ For instance, the following call returns ICD-10 **codes** and **descriptions** c
 
 
 ```{r}
-icd10api(code = "z", limit = 50)
+icd10api(icd_code = "z", field = "both", limit = 50)
 ```
 
 
@@ -112,6 +112,6 @@ While the call below returns only the ICD-10 **codes** containing "Z":
 
 
 ```{r}
-icd10api(code = "z", field = "code", limit = 50)
+icd10api(icd_code = "z", field = "code", limit = 50)
 ```
 

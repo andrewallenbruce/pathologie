@@ -29,7 +29,8 @@ diagnosis and grouped to one of the listed DRGs the diagnosis is excluded from
 acting as a CC/MCC for severity in DRG assignment.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-appendix_C()
-\dontshow{\}) # examplesIf}
+head(appendix_C()$cc_mcc)
+
+head(appendix_C()$pdx_groups)
+
 }

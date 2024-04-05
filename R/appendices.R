@@ -16,7 +16,7 @@
 #'
 #' @template returns
 #'
-#' @examplesIf interactive()
+#' @examples
 #' appendix_A(drg = "011")
 #'
 #' appendix_A(mdc = "24")
@@ -48,8 +48,8 @@ appendix_A <- function(drg  = NULL,
 #'
 #' @template returns
 #'
-#' @examplesIf interactive()
-#' appendix_B()
+#' @examples
+#' head(appendix_B())
 #'
 #' @autoglobal
 #'
@@ -79,8 +79,10 @@ appendix_B <- function() {
 #'
 #' @template returns
 #'
-#' @examplesIf interactive()
-#' appendix_C()
+#' @examples
+#' head(appendix_C()$cc_mcc)
+#'
+#' head(appendix_C()$pdx_groups)
 #'
 #' @autoglobal
 #'

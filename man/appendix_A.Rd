@@ -26,9 +26,8 @@ an MDC specified. The letter M is used to designate a medical MS-DRG and the
 letter P is used to designate a surgical MS-DRG.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 appendix_A(drg = "011")
 
 appendix_A(mdc = "24")
-\dontshow{\}) # examplesIf}
+
 }

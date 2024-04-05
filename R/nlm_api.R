@@ -1,13 +1,13 @@
 #' National Library of Medicine's ICD-10-CM API
 #'
 #' @description [icd10api()] allows you to search the National Library of
-#'    Medicine's ICD-10-CM API by code or associated term.
+#'   Medicine's ICD-10-CM API by code or associated term.
 #'
 #' @details ICD-10-CM (International Classification of Diseases, 10th Revision,
-#' Clinical Modification) is a medical coding system for classifying
-#' diagnoses and reasons for visits in U.S. health care settings.
+#'   Clinical Modification) is a medical coding system for classifying diagnoses
+#'   and reasons for visits in U.S. health care settings.
 #'
-#' ## Links
+#'   ## Links
 #'  * [NIH NLM Clinical Table Service ICD-10-CM API](https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html)
 #'  * [Learn more about ICD-10-CM.](http://www.cdc.gov/nchs/icd/icd10cm.htm)
 #'
@@ -15,30 +15,31 @@
 #'
 #' @source National Library of Medicine/National Institute of Health
 #'
-#' @param code `<chr>` ICD-10-CM code
+#' @param icd_code `<chr>` ICD-10-CM code containing 3 to 7 characters, excluding
+#'   the dot
 #'
-#' @param term `<chr>` Associated term describing an ICD-10 code
+#' @param term `<chr>` Associated term describing an ICD-10-CM code
 #'
-#' @param field `<chr>` `code` or `both`; default is `both`
+#' @param field `<chr>` `code` or `both`; default is `code`
 #'
-#' @param limit `<int>` API limit, defaults to 500
+#' @param limit `<int>` API limit, defaults to `500`. Note that the current
+#'   limit on the total number of results that can be retrieved is 7,500.
 #'
 #' @template args-dots
 #'
 #' @template returns
 #'
 #' @examples
-#' # Returns the seven codes
-#' # beginning with "A15"
-#' icd10api(code = "A15")
+#' # Returns the seven codes beginning with `A15`
+#' icd10api(icd_code = "A15")
 #'
 #' # Returns the first five codes
 #' # associated with tuberculosis
-#' icd10api(term = "tuber", limit = 5)
+#' icd10api(term = "tuber", field = "both", limit = 5)
 #'
 #' # Returns the two codes
 #' # associated with pleurisy
-#' icd10api(term = "pleurisy")
+#' icd10api(term = "pleurisy", field = "both")
 #'
 #' # If you're searching for codes beginning
 #' # with a certain letter, you must set the
@@ -46,30 +47,33 @@
 #' # search for terms as well:
 #'
 #' # Returns terms containing the letter "Z"
-#' icd10api(code = "z", limit = 5)
+#' icd10api(icd_code = "z", limit = 5)
 #'
 #' # Returns codes beginning with "Z"
-#' icd10api(code = "z", field = "code", limit = 5)
+#' icd10api(icd_code = "z", field = "code", limit = 5)
+#'
+#' # Will error if results exceed API limit
+#' try(icd10api(icd_code = "I", field = "both"))
 #'
 #' @autoglobal
 #'
 #' @export
-icd10api <- function(code  = NULL,
-                     term  = NULL,
-                     field = c("both", "code"),
-                     limit = 500L,
+icd10api <- function(icd_code = NULL,
+                     term     = NULL,
+                     field    = c("code", "both"),
+                     limit    = 500L,
                      ...) {
 
   stopifnot(
-    "Both `code` and `term` cannot be NULL" = all(
+    "Both `icd_code` and `term` cannot be NULL" = all(
       !is.null(
-        c(code, term)
+        c(icd_code, term)
         )
       )
     )
 
   args <- stringr::str_c(
-    c(code = code,
+    c(code = icd_code,
       term = term),
     collapse = ",")
 
@@ -96,12 +100,18 @@ icd10api <- function(code  = NULL,
 
   count <- results[[1]]
 
+  if (count > 7500L) {
+    cli::cli_abort(c(
+      "Your search returned {.strong {.val {count}}} results.",
+      "x" = "The NLM ICD-10-CM API limit is {.strong {.emph 7,500}}."))
+  }
+
   if (limit < 500L | count <= 500) {
 
     results <- results[[4]] |>
       as.data.frame() |>
-      dplyr::rename(code        = V1,
-                    description = V2) |>
+      dplyr::rename(icd_code = V1,
+                    icd_description = V2) |>
       dplyr::tibble()
   }
 
@@ -119,8 +129,8 @@ icd10api <- function(code  = NULL,
 
     results <- results[[4]] |>
       as.data.frame() |>
-      dplyr::rename(code        = V1,
-                    description = V2) |>
+      dplyr::rename(icd_code        = V1,
+                    icd_description = V2) |>
       dplyr::tibble() |>
       vctrs::vec_rbind(res2)
   }
@@ -149,8 +159,8 @@ icd10api <- function(code  = NULL,
 
   results[[4]] |>
     as.data.frame() |>
-    dplyr::rename(code        = V1,
-                  description = V2) |>
+    dplyr::rename(icd_code        = V1,
+                  icd_description = V2) |>
     dplyr::tibble()
 
 }

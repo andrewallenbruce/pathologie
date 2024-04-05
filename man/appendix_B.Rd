@@ -15,7 +15,6 @@ the MDC, and the MS-DRGs to which the diagnosis is used to define the logic
 of the DRG either as a principal or secondary diagnosis.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-appendix_B()
-\dontshow{\}) # examplesIf}
+head(appendix_B())
+
 }

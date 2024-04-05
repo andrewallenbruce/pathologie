@@ -44,7 +44,7 @@ icd10cm(icd = c("I10", "I15.0")) |>
 
 
 ```{r}
-icd10api(code = "I1")
+icd10api(icd_code = "I1")
 ```
 
 
