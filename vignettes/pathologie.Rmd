@@ -115,3 +115,21 @@ While the call below returns only the ICD-10 **codes** containing "Z":
 icd10api(icd_code = "z", field = "code", limit = 50)
 ```
 
+
+# ICD-10-CM Code Edits
+
+```{r}
+ex_data() |>
+  dplyr::mutate(patient_age = years_floor(date_of_birth,
+                                          date_of_service)) |>
+  dplyr::left_join(search_edits()) |>
+  dplyr::filter(icd_conflict_group == "Age") |>
+  dplyr::mutate(conflict = apply_age_edits(rule = icd_conflict_rule,
+                                           age = patient_age)) |>
+  dplyr::filter(!is.na(conflict)) |> 
+  dplyr::select(-icd_conflict_group, -conflict) |> 
+  gt(groupname_col = "icd_conflict_rule",
+     row_group_as_column = TRUE) |> 
+  gt_style()
+```
+

@@ -1,15 +1,21 @@
 #' Check if string is valid ICD-10-CM code
-#' @param x `<chr>` string of `length(1)`
+#'
+#' @param x `<chr>` string of `length(x) == 1`
+#'
 #' @param arg `<chr>` function argument name in the current function
-#' @param call `<environment>` environment the function is called from
-#' @return `<lgl>` `TRUE` if valid, `FALSE` otherwise
+#'
+#' @param call `<env>` environment the function is called from
+#'
+#' @returns `<lgl>` vector; `TRUE` if valid, `FALSE` otherwise
+#'
 #' @examples
 #' purrr::map_vec(
 #' c("H00.019", "D50.1", "C4A.70", "Z20.818", "11646", "E8015"),
 #' is_valid_icd)
 #'
-#' @export
 #' @autoglobal
+#'
+#' @export
 is_valid_icd <- function(x,
                          arg = rlang::caller_arg(x),
                          call = rlang::caller_env()) {
@@ -32,14 +38,14 @@ is_valid_icd <- function(x,
 
 #' Check if an ICD-10-CM code is in a valid format
 #'
-#' @description
-#' `is_valid_icd10cm` checks to see if the ICD-10-CM code is valid
+#' `is_valid_icd10cm()` checks to see if the ICD-10-CM code is valid
 #' and has between 3 and 8 characters, and starts with a letter and number.
 #'
 #' @param x A string
 #'
-#' @return Boolean
-#' @export
+#' @returns Boolean
+#'
+#' @noRd
 #'
 #' @examples
 #' is_valid_icd10cm("F320") # valid

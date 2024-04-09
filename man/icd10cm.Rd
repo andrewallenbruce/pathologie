@@ -20,8 +20,7 @@ Clinical Modification) is a medical coding system for classifying
 diagnoses and reasons for visits in U.S. health care settings.
 }
 \examples{
-icd10cm(
-   c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4", "E06.3", "H00.019", "D50.1", "C4A.70")
-   )
+icd10cm( c("F50.8", "G40.311", "Q96.8", "Z62.890", "R45.4", "E06.3",
+"H00.019", "D50.1", "C4A.70") )
 
 }

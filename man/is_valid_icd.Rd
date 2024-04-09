@@ -7,14 +7,14 @@
 is_valid_icd(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
 }
 \arguments{
-\item{x}{\verb{<chr>} string of \code{length(1)}}
+\item{x}{\verb{<chr>} string of \code{length(x) == 1}}
 
 \item{arg}{\verb{<chr>} function argument name in the current function}
 
-\item{call}{\verb{<environment>} environment the function is called from}
+\item{call}{\verb{<env>} environment the function is called from}
 }
 \value{
-\verb{<lgl>} \code{TRUE} if valid, \code{FALSE} otherwise
+\verb{<lgl>} vector; \code{TRUE} if valid, \code{FALSE} otherwise
 }
 \description{
 Check if string is valid ICD-10-CM code
