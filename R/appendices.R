@@ -31,11 +31,12 @@ appendix_A <- function(drg  = NULL,
 
   msd <- pins::pin_read(mount_board(), "msdrg_41.1")
 
-  if (!is.null(type)) {msd <- vctrs::vec_slice(msd, msd$drg_type == type)}
+  if (!is.null(type)) {
+    msd <- vctrs::vec_slice(msd, msd$drg_type == type)
+  }
 
-  if (!is.null(drg)) {msd <- search_in(msd, msd$drg, drg)}
-
-  if (!is.null(mdc)) {msd <- search_in(msd, msd$mdc, mdc)}
+  msd <- fuimus::search_in_if(msd, msd$drg, drg)
+  msd <- fuimus::search_in_if(msd, msd$mdc, mdc)
 
   return(msd)
 }

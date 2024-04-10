@@ -1,4 +1,12 @@
 url: https://andrewallenbruce.github.io/pathologie/
 template:
   bootstrap: 5
+  theme: tango
+  bslib:
+    font_scale: 1.1
+    base_font: {google: "Atkinson Hyperlegible"}
+    heading_font: {google: "Atkinson Hyperlegible"}
+    code_font: "Hack, mono"
+  includes:
+    in_header: <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
 

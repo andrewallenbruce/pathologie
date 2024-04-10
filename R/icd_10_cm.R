@@ -30,7 +30,7 @@ icd10cm <- function(icd = NULL,
       ) |>
       tidyr::unnest(icd_sec_code)
 
-    icd10 <- search_in(icd10, icd10$icd_code, icd)
+    icd10 <- fuimus::search_in(icd10, icd10$icd_code, icd)
 
     edit <- search_edits(icd = icd)
 

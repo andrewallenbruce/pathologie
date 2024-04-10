@@ -38,12 +38,11 @@ search_msdrg <- function(drg  = NULL,
                          ...) {
 
   ms <- pins::pin_read(mount_board(), "msdrg")
+  ms <- fuimus::search_in_if(ms, ms$drg, drg)
+  ms <- fuimus::search_in_if(ms, ms$mdc, mdc)
 
-  if (!is.null(type)) {ms <- vctrs::vec_slice(ms, ms$drg_type == type)}
-
-  if (!is.null(drg)) {ms <- search_in(ms, ms$drg, drg)}
-
-  if (!is.null(mdc)) {ms <- search_in(ms, ms$mdc, mdc)}
-
+  if (!is.null(type)) {
+    ms <- vctrs::vec_slice(ms, ms$drg_type == type)
+  }
   return(ms)
 }

@@ -25,6 +25,7 @@ Imports:
     vctrs (>= 0.6.5)
 Suggests: 
     qs,
+    fuimus,
     gt,
     knitr,
     rmarkdown,
@@ -33,6 +34,8 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
+Remotes: 
+    github::andrewallenbruce/fuimus
 Config/roxyglobals/filename: roxyglobals-generated.R
 Config/roxyglobals/unique: TRUE
 Encoding: UTF-8
