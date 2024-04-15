@@ -64,7 +64,10 @@ appendix_c12 <- appendix_c12 |>
   dplyr::mutate(pdx_icd = pathologie::add_dot(pdx_icd))
 
 
-# |> tidyr::nest(pdx_icd = pdx_icd)
+pdx_join <- appendix_c11 |>
+  left_join(appendix_c12, by = "pdx_group") |>
+  tidyr::nest(pdx_icd = pdx_icd)
+
 # appendix_c <- dplyr::left_join(
 #   appendix_c11,
 #   appendix_c12,
@@ -72,16 +75,19 @@ appendix_c12 <- appendix_c12 |>
 #   tidyr::unnest(pdx_icd) |>
 #   tidyr::nest(pdx_groups = c(pdx_group, pdx_icd))
 
-appendixC <- list(
-  cc_mcc = appendix_c11,
-  pdx_groups = appendix_c12
-)
+
+pdx_join
+
+# appendixC <- list(
+#   cc_mcc = appendix_c11,
+#   pdx_groups = appendix_c12
+# )
 
 # Update Pin
 board <- pins::board_folder(here::here("inst/extdata/pins"))
 
 board |> pins::pin_write(
-  appendixC,
+  pdx_join,
   name = "msdrg_ccmcc_41.1",
   title = "Appendix C Complications or Comorbidities Exclusion list 41.1",
   description = c(

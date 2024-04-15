@@ -5,6 +5,7 @@
 #   of the DRG either as a principal or secondary diagnosis.
 
 library(tidyverse)
+library(pathologie)
 
 path <- "C:/Users/Andrew/Desktop/payer_guidelines/data/MSDRG/MSDRGv41.1ICD10_R0_DefinitionsManual_TEXT_0/appendix_B.txt"
 

@@ -4,7 +4,14 @@
 \alias{appendix_C}
 \title{Appendix C: Complications or Comorbidities Exclusion list}
 \usage{
-appendix_C()
+appendix_C(icd = NULL, pdx = NULL, ...)
+}
+\arguments{
+\item{icd}{\verb{<chr>} vector of ICD-10-CM codes}
+
+\item{pdx}{\verb{<chr>} 4-digit Principal Diagnosis (PDX) Group number}
+
+\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -29,8 +36,8 @@ diagnosis and grouped to one of the listed DRGs the diagnosis is excluded from
 acting as a CC/MCC for severity in DRG assignment.
 }
 \examples{
-head(appendix_C()$cc_mcc)
+appendix_C(icd = "A17.81")
 
-head(appendix_C()$pdx_groups)
+appendix_C(pdx = "0032")
 
 }

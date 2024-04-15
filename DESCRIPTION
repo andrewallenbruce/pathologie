@@ -13,7 +13,6 @@ Depends:
     R (>= 4.1.0)
 Imports:
     cli (>= 3.6.2),
-    collapse (>= 2.0.11),
     dplyr (>= 1.1.4),
     fs (>= 1.6.3),
     httr2 (>= 1.0.0),

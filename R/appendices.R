@@ -78,16 +78,31 @@ appendix_B <- function() {
 #' diagnosis and grouped to one of the listed DRGs the diagnosis is excluded from
 #' acting as a CC/MCC for severity in DRG assignment.
 #'
+#' @template args-icd_code
+#'
+#' @param pdx `<chr>` 4-digit Principal Diagnosis (PDX) Group number
+#'
+#' @template args-dots
+#'
 #' @template returns
 #'
 #' @examples
-#' head(appendix_C()$cc_mcc)
+#' appendix_C(icd = "A17.81")
 #'
-#' head(appendix_C()$pdx_groups)
+#' appendix_C(pdx = "0032")
 #'
 #' @autoglobal
 #'
 #' @export
-appendix_C <- function() {
-  pins::pin_read(mount_board(), "msdrg_ccmcc_41.1")
+appendix_C <- function(icd = NULL,
+                       pdx = NULL,
+                       ...) {
+
+  mcc <- pins::pin_read(mount_board(), "msdrg_ccmcc_41.1")
+
+  mcc <- fuimus::search_in_if(mcc, mcc$pdx_group, pdx)
+
+  mcc <- fuimus::search_in_if(mcc, mcc$icd_code, icd)
+
+  return(mcc)
 }
