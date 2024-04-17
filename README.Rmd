@@ -18,6 +18,10 @@ knitr::opts_chunk$set(
 > Tidy ICD-10-CM Interface
 
 <!-- badges: start -->
+[![Codecov](https://codecov.io/gh/andrewallenbruce/pathologie/branch/main/graph/badge.svg)](https://codecov.io/gh/andrewallenbruce/pathologie)
+[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie)
+[![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie)
+[![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie/commits/main)
 <!-- badges: end -->
 
 ## :package: Installation
@@ -33,6 +37,7 @@ pak::pak("andrewallenbruce/pathologie")
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(pathologie)
+library(fuimus)
 library(dplyr)
 ```
 
@@ -47,6 +52,31 @@ icd10cm(icd = c("I10", "I15.0")) |>
 icd10api(icd_code = "I1")
 ```
 
+# ICD-10-CM Conflict Rules
+
+```{r}
+ex_data() |>
+  dplyr::mutate(
+    patient_age = years_floor(
+      date_of_birth, 
+      date_of_service
+      )
+    ) |>
+  dplyr::left_join(
+    search_edits(), 
+    by = dplyr::join_by(icd_code), 
+    relationship = "many-to-many"
+    ) |>
+  dplyr::filter(
+    icd_conflict_group == "Age"
+    ) |>
+  dplyr::mutate(
+    conflict = apply_age_edits(
+      rule = icd_conflict_rule,
+      age = patient_age
+      )
+    )
+```
 
 
 ------------------------------------------------------------------------------

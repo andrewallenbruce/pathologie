@@ -6,6 +6,13 @@
 > Tidy ICD-10-CM Interface
 
 <!-- badges: start -->
+
+[![Codecov](https://codecov.io/gh/andrewallenbruce/pathologie/branch/main/graph/badge.svg)](https://codecov.io/gh/andrewallenbruce/pathologie)
+[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie)
+[![Code
+size](https://img.shields.io/github/languages/code-size/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie)
+[![Last
+commit](https://img.shields.io/github/last-commit/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie/commits/main)
 <!-- badges: end -->
 
 ## :package: Installation
@@ -21,6 +28,7 @@ pak::pak("andrewallenbruce/pathologie")
 
 ``` r
 library(pathologie)
+library(fuimus)
 library(dplyr)
 ```
 
@@ -64,6 +72,48 @@ icd10api(icd_code = "I1")
 #> 16 I16.1    Hypertensive emergency                                              
 #> 17 I16.9    Hypertensive crisis, unspecified                                    
 #> 18 I1A.0    Resistant hypertension
+```
+
+# ICD-10-CM Conflict Rules
+
+``` r
+ex_data() |>
+  dplyr::mutate(
+    patient_age = years_floor(
+      date_of_birth, 
+      date_of_service
+      )
+    ) |>
+  dplyr::left_join(
+    search_edits(), 
+    by = dplyr::join_by(icd_code), 
+    relationship = "many-to-many"
+    ) |>
+  dplyr::filter(
+    icd_conflict_group == "Age"
+    ) |>
+  dplyr::mutate(
+    conflict = apply_age_edits(
+      rule = icd_conflict_rule,
+      age = patient_age
+      )
+    )
+#> # A tibble: 224 × 8
+#>    date_of_birth date_of_service icd_code patient_age icd_description           
+#>    <date>        <date>          <chr>          <dbl> <chr>                     
+#>  1 2015-11-27    2023-01-08      Z00.00             7 Encntr for general adult …
+#>  2 1990-11-07    2023-11-13      F53.0             33 Postpartum depression     
+#>  3 2006-12-23    2023-09-26      F64.2             16 Gender identity disorder …
+#>  4 1986-01-25    2023-08-05      Z91.82            37 Personal history of milit…
+#>  5 1992-10-23    2023-06-29      O90.6             30 Postpartum mood disturban…
+#>  6 2014-01-25    2023-06-27      Z00.00             9 Encntr for general adult …
+#>  7 2011-01-07    2023-04-12      F64.2             12 Gender identity disorder …
+#>  8 1992-12-03    2023-03-02      F53.0             30 Postpartum depression     
+#>  9 2000-11-12    2023-10-16      F53.0             22 Postpartum depression     
+#> 10 1993-10-12    2022-12-13      F53.0             29 Postpartum depression     
+#> # ℹ 214 more rows
+#> # ℹ 3 more variables: icd_conflict_group <chr>, icd_conflict_rule <chr>,
+#> #   conflict <chr>
 ```
 
 ------------------------------------------------------------------------
