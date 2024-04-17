@@ -17,8 +17,7 @@
 #' @autoglobal
 #'
 #' @export
-icd10cm <- function(icd = NULL,
-                    ...) {
+icd10cm <- function(icd = NULL, ...) {
 
   icd10 <- pins::pin_read(mount_board(), "icd10cm")
 

@@ -1,0 +1,12 @@
+file: msdrg_icd_ccs_41.qs
+file_size: 102992
+pin_hash: 0c4a423d52bd6b86
+type: qs
+title: Appendix G Diagnoses Defined as Complications or Comorbidities 41.1
+description: Diagnoses in Appendix G are considered complications or comorbidities
+  (CC) except when used in conjunction with the principal diagnosis in the corresponding
+  CC Exclusion List in Appendix C.
+tags: ~
+urls: ~
+created: 20240417T083635Z
+api_version: 1

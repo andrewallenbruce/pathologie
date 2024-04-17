@@ -2,11 +2,7 @@
 % Please edit documentation in R/appendices.R
 \name{appendix_D}
 \alias{appendix_D}
-\title{Appendix D MS-DRG Surgical Hierarchy by MDC and MS-DRG
-Since patients can have multiple procedures related to their principal
-diagnosis during a particular hospital stay, and a patient can be assigned to
-only one surgical class, the surgical classes in each MDC are defined in a
-hierarchical order.}
+\title{Appendix D MS-DRG Surgical Hierarchy by MDC and MS-DRG}
 \usage{
 appendix_D()
 }
@@ -14,6 +10,12 @@ appendix_D()
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
+Since patients can have multiple procedures related to their principal
+diagnosis during a particular hospital stay, and a patient can be assigned to
+only one surgical class, the surgical classes in each MDC are defined in a
+hierarchical order.
+}
+\details{
 Patients with multiple procedures are assigned to the highest surgical class
 in the hierarchy to which one of the procedures is assigned. Thus, if a
 patient receives both a D&C and a hysterectomy, the patient is assigned to the
@@ -22,8 +24,7 @@ than a D&C. Because of the surgical hierarchy, ordering of the surgical
 procedures on the patient abstract or claim has no influence on the assignment
 of the surgical class and the MS-DRG. The surgical hierarchy for each MDC
 reflects the relative resource requirements of various surgical procedures.
-}
-\details{
+
 In some cases a surgical class in the hierarchy is actually an MS-DRG. For
 example, Arthroscopy is both a surgical class in the hierarchy and MS-DRG 509
 in MDC 8, Diseases and Disorders of the Musculoskeletal System and Connective

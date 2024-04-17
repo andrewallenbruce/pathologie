@@ -1,0 +1,14 @@
+file: msdrg_icd_mccs_41.qs
+file_size: 13433
+pin_hash: dc7a76ff31084a35
+type: qs
+title: Appendix H Diagnoses Defined as Major Complications or Comorbidities 41.1
+description: Diagnoses in Appendix H Part I are considered major complications or
+  comorbidities (MCC) except when used in conjunction with the principal diagnosis
+  in the corresponding CC Exclusion List in Appendix C. In addition to the CC exclusion
+  list, the diagnoses in Part II are assigned as a major CC only for patients discharged
+  alive, otherwise they will be assigned as a non CC.
+tags: ~
+urls: ~
+created: 20240417T082757Z
+api_version: 1

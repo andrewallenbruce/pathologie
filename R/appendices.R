@@ -113,7 +113,7 @@ appendix_C <- function(icd = NULL,
 
 
 #' Appendix D MS-DRG Surgical Hierarchy by MDC and MS-DRG
-
+#'
 #' Since patients can have multiple procedures related to their principal
 #' diagnosis during a particular hospital stay, and a patient can be assigned to
 #' only one surgical class, the surgical classes in each MDC are defined in a
@@ -159,4 +159,43 @@ appendix_C <- function(icd = NULL,
 #' @export
 appendix_D <- function() {
   pins::pin_read(mount_board(), "msdrg_drg_groups_41.1")
+}
+
+#' Appendix G Diagnoses Defined as Complications or Comorbidities
+#'
+#' Diagnoses in Appendix G are considered complications or comorbidities (CC)
+#' except when used in conjunction with the principal diagnosis in the
+#' corresponding CC Exclusion List in Appendix C.
+#'
+#' @template returns
+#'
+#' @examples
+#' head(appendix_G())
+#'
+#' @autoglobal
+#'
+#' @export
+appendix_G <- function() {
+  pins::pin_read(mount_board(), "msdrg_icd_ccs_41.1")
+}
+
+#' Appendix H Diagnoses Defined as Major Complications or Comorbidities
+#'
+#' Diagnoses in Appendix H Part I are considered major complications or
+#' comorbidities (MCC) except when used in conjunction with the principal
+#' diagnosis in the corresponding CC Exclusion List in Appendix C. In addition to
+#' the CC exclusion list, the diagnoses in Part II are assigned as a major CC
+#' only for patients discharged alive, otherwise they will be assigned as a non
+#' CC.
+#'
+#' @template returns
+#'
+#' @examples
+#' head(appendix_H())
+#'
+#' @autoglobal
+#'
+#' @export
+appendix_H <- function() {
+  pins::pin_read(mount_board(), "msdrg_icd_mccs_41.1")
 }
