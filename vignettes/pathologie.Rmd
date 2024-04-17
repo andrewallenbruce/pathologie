@@ -128,9 +128,10 @@ ex_data() |>
   dplyr::mutate(conflict = apply_age_edits(rule = icd_conflict_rule,
                                            age = patient_age)) |>
   dplyr::filter(!is.na(conflict)) |> 
-  dplyr::select(-icd_conflict_group, -conflict) |> 
+  dplyr::select(-icd_conflict_group) |>
   gt(groupname_col = "icd_conflict_rule",
      row_group_as_column = TRUE) |> 
-  gt_style()
+  gt_style() |> 
+  tab_options(column_labels.hidden = FALSE)
 ```
 

@@ -20,43 +20,13 @@
 #' @autoglobal
 #'
 #' @export
-search_edits <- function(icd = NULL,
-                         ...) {
+search_edits <- function(icd = NULL, ...) {
 
   edt <- pins::pin_read(mount_board(), "code_edits")
 
   edt <- fuimus::search_in_if(edt, edt$icd_code, icd)
 
   return(edt)
-}
-
-
-#' Calculate the number of years between two dates
-#'
-#' @param from `<date>` Start date
-#'
-#' @param to `<date>` End date
-#'
-#' @template returns
-#'
-#' @examples
-#' years_floor(
-#'    from = as.Date("2020-01-01"),
-#'    to   = as.Date("2020-01-01") + 2057)
-#'
-#' @autoglobal
-#'
-#' @export
-years_floor <- function(from, to) {
-  floor(
-    as.integer(
-      difftime(
-        to,
-        from,
-        units = "weeks",
-        tz = "UTC"
-        )
-      ) / 52.17857)
 }
 
 #' Apply Age Conflict Edits
