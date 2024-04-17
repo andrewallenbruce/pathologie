@@ -4,12 +4,15 @@
 \alias{appendix_C}
 \title{Appendix C: Complications or Comorbidities Exclusion list}
 \usage{
-appendix_C(icd = NULL, pdx = NULL, ...)
+appendix_C(icd = NULL, pdx = NULL, unnest = FALSE, ...)
 }
 \arguments{
 \item{icd}{\verb{<chr>} vector of ICD-10-CM codes}
 
-\item{pdx}{\verb{<chr>} 4-digit Principal Diagnosis (PDX) Group number}
+\item{pdx}{\verb{<chr>} 4-digit Principal Diagnosis (PDX) Group number, e.g.,
+\code{0011} (~ 2,040 in total)}
+
+\item{unnest}{\verb{<lgl>} Unnest the \code{pdx_icd} column}
 
 \item{...}{Empty dots}
 }
@@ -22,8 +25,8 @@ complication or comorbidity (CC) or a major complication or comorbidity (MCC)
 when used as a secondary diagnosis.
 }
 \details{
-Part 1 lists these codes. Each code is indicated as CC or MCC. A link is given
-to a collection of diagnosis codes which, when used as the principal
+Part 1 lists these codes. Each code is indicated as CC or MCC. A link is
+given to a collection of diagnosis codes which, when used as the principal
 diagnosis, will cause the CC or MCC to be considered as only a non-CC.
 
 Part 2 lists codes which are assigned as a Major CC only for patients
@@ -32,8 +35,8 @@ discharged alive. Otherwise they are assigned as a non-CC.
 Part 3 lists diagnosis codes that are designated as a complication or
 comorbidity (CC) or major complication or comorbidity (MCC) and included in
 the definition of the logic for the listed DRGs. When reported as a secondary
-diagnosis and grouped to one of the listed DRGs the diagnosis is excluded from
-acting as a CC/MCC for severity in DRG assignment.
+diagnosis and grouped to one of the listed DRGs the diagnosis is excluded
+from acting as a CC/MCC for severity in DRG assignment.
 }
 \examples{
 appendix_C(icd = "A17.81")

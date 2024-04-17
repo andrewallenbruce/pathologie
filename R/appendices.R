@@ -65,8 +65,8 @@ appendix_B <- function() {
 #' complication or comorbidity (CC) or a major complication or comorbidity (MCC)
 #' when used as a secondary diagnosis.
 #'
-#' Part 1 lists these codes. Each code is indicated as CC or MCC. A link is given
-#' to a collection of diagnosis codes which, when used as the principal
+#' Part 1 lists these codes. Each code is indicated as CC or MCC. A link is
+#' given to a collection of diagnosis codes which, when used as the principal
 #' diagnosis, will cause the CC or MCC to be considered as only a non-CC.
 #'
 #' Part 2 lists codes which are assigned as a Major CC only for patients
@@ -75,12 +75,15 @@ appendix_B <- function() {
 #' Part 3 lists diagnosis codes that are designated as a complication or
 #' comorbidity (CC) or major complication or comorbidity (MCC) and included in
 #' the definition of the logic for the listed DRGs. When reported as a secondary
-#' diagnosis and grouped to one of the listed DRGs the diagnosis is excluded from
-#' acting as a CC/MCC for severity in DRG assignment.
+#' diagnosis and grouped to one of the listed DRGs the diagnosis is excluded
+#' from acting as a CC/MCC for severity in DRG assignment.
 #'
 #' @template args-icd_code
 #'
-#' @param pdx `<chr>` 4-digit Principal Diagnosis (PDX) Group number
+#' @param pdx `<chr>` 4-digit Principal Diagnosis (PDX) Group number, e.g.,
+#'   `0011` (~ 2,040 in total)
+#'
+#' @param unnest `<lgl>` Unnest the `pdx_icd` column
 #'
 #' @template args-dots
 #'
@@ -96,6 +99,7 @@ appendix_B <- function() {
 #' @export
 appendix_C <- function(icd = NULL,
                        pdx = NULL,
+                       unnest = FALSE,
                        ...) {
 
   mcc <- pins::pin_read(mount_board(), "msdrg_ccmcc_41.1")
@@ -105,4 +109,54 @@ appendix_C <- function(icd = NULL,
   mcc <- fuimus::search_in_if(mcc, mcc$icd_code, icd)
 
   return(mcc)
+}
+
+
+#' Appendix D MS-DRG Surgical Hierarchy by MDC and MS-DRG
+
+#' Since patients can have multiple procedures related to their principal
+#' diagnosis during a particular hospital stay, and a patient can be assigned to
+#' only one surgical class, the surgical classes in each MDC are defined in a
+#' hierarchical order.
+#'
+#' Patients with multiple procedures are assigned to the highest surgical class
+#' in the hierarchy to which one of the procedures is assigned. Thus, if a
+#' patient receives both a D&C and a hysterectomy, the patient is assigned to the
+#' hysterectomy surgical class because a hysterectomy is higher in the hierarchy
+#' than a D&C. Because of the surgical hierarchy, ordering of the surgical
+#' procedures on the patient abstract or claim has no influence on the assignment
+#' of the surgical class and the MS-DRG. The surgical hierarchy for each MDC
+#' reflects the relative resource requirements of various surgical procedures.
+#'
+#' In some cases a surgical class in the hierarchy is actually an MS-DRG. For
+#' example, Arthroscopy is both a surgical class in the hierarchy and MS-DRG 509
+#' in MDC 8, Diseases and Disorders of the Musculoskeletal System and Connective
+#' Tissue.
+#'
+#' In other cases the surgical class in the hierarchy is further partitioned
+#' based on other variables such as complications and comorbidities, or principal
+#' diagnosis to form multiple MS-DRGs. As an example, in MDC 5, Diseases and
+#' Disorders of the Circulatory System, the surgical class for permanent
+#' pacemaker implantation is divided into three MS-DRGs (242-244) based on
+#' whether or not the patient had no CCs, a CC or an MCC.
+#'
+#' Appendix D presents the surgical hierarchy for each MDC. Appendix D is
+#' organized by MDC with a list of the surgical classes associated with that MDC
+#' listed in hierarchical order as well as the MS-DRGs that are included in each
+#' surgical class.
+#'
+#' The names given to the surgical classes in the hierarchy correspond to the
+#' names used in the MS-DRG logic tables and in the body of the Definitions
+#' Manual.
+#'
+#' @template returns
+#'
+#' @examples
+#' head(appendix_D())
+#'
+#' @autoglobal
+#'
+#' @export
+appendix_D <- function() {
+  pins::pin_read(mount_board(), "msdrg_drg_groups_41.1")
 }

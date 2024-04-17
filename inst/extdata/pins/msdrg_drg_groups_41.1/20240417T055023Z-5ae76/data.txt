@@ -1,0 +1,13 @@
+file: msdrg_drg_groups_41.qs
+file_size: 4153
+pin_hash: 5ae76dedd2b23d07
+type: qs
+title: Appendix D MS-DRG Surgical Hierarchy by MDC and MS-DRG 41.1
+description: Appendix D presents the surgical hierarchy for each MDC. Appendix D is
+  organized by MDC with a list of the surgical classes associated with that MDC listed
+  in hierarchical order as well as the MS-DRGs that are included in each surgical
+  class.
+tags: ~
+urls: ~
+created: 20240417T055023Z
+api_version: 1
