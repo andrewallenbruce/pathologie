@@ -60,7 +60,7 @@ when used as a secondary diagnosis.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">appendix_C</span><span class="op">(</span>icd <span class="op">=</span> <span class="cn">NULL</span>, pdx <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">appendix_C</span><span class="op">(</span>icd <span class="op">=</span> <span class="cn">NULL</span>, pdx <span class="op">=</span> <span class="cn">NULL</span>, unnest <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -70,7 +70,12 @@ when used as a secondary diagnosis.</p>
 
 
 <dt>pdx</dt>
-<dd><p><code>&lt;chr&gt;</code> 4-digit Principal Diagnosis (PDX) Group number</p></dd>
+<dd><p><code>&lt;chr&gt;</code> 4-digit Principal Diagnosis (PDX) Group number, e.g.,
+<code>0011</code> (~ 2,040 in total)</p></dd>
+
+
+<dt>unnest</dt>
+<dd><p><code>&lt;lgl&gt;</code> Unnest the <code>pdx_icd</code> column</p></dd>
 
 
 <dt>...</dt>
@@ -87,16 +92,16 @@ when used as a secondary diagnosis.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Part 1 lists these codes. Each code is indicated as CC or MCC. A link is given
-to a collection of diagnosis codes which, when used as the principal
+    <p>Part 1 lists these codes. Each code is indicated as CC or MCC. A link is
+given to a collection of diagnosis codes which, when used as the principal
 diagnosis, will cause the CC or MCC to be considered as only a non-CC.</p>
 <p>Part 2 lists codes which are assigned as a Major CC only for patients
 discharged alive. Otherwise they are assigned as a non-CC.</p>
 <p>Part 3 lists diagnosis codes that are designated as a complication or
 comorbidity (CC) or major complication or comorbidity (MCC) and included in
 the definition of the logic for the listed DRGs. When reported as a secondary
-diagnosis and grouped to one of the listed DRGs the diagnosis is excluded from
-acting as a CC/MCC for severity in DRG assignment.</p>
+diagnosis and grouped to one of the listed DRGs the diagnosis is excluded
+from acting as a CC/MCC for severity in DRG assignment.</p>
     </div>
 
     <div class="section level2">
