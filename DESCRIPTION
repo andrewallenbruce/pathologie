@@ -2,8 +2,8 @@ Package: pathologie
 Title: Tidy ICD-10-CM Tools
 Version: 0.0.1
 Authors@R: 
-    person("Andrew", "Bruce", , "andrew.bruce@northstarrevenueintegrity.com", role = c("aut", "cre", "cph"))
-Maintainer: Andrew Bruce <andrew.bruce@northstarrevenueintegrity.com>
+    person("Andrew", "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
+Maintainer: Andrew Bruce <andrewallenbruce@gmail.com>
 Description: Tools for working with ICD-10-CM codes.
 License: MIT + file LICENSE
 URL: https://andrewallenbruce.github.io/pathologie/,
@@ -41,4 +41,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
