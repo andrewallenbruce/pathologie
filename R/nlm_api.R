@@ -66,11 +66,7 @@ icd10api <- function(icd_code = NULL,
 
   stopifnot(
     "Both `icd_code` and `term` cannot be NULL" = all(
-      !is.null(
-        c(icd_code, term)
-        )
-      )
-    )
+      !is.null(c(icd_code, term))))
 
   args <- stringr::str_c(
     c(code = icd_code,

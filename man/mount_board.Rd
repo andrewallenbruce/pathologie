@@ -7,7 +7,7 @@
 mount_board(source = c("local", "remote"))
 }
 \arguments{
-\item{`<chr>`}{string; whether source is \code{"local"} or \code{"remote"}}
+\item{source}{\verb{<chr>} string; whether source is \code{"local"} or \code{"remote"}}
 }
 \value{
 \verb{<pins_board_folder>} if \code{source = "local"} or \verb{<pins_board_url>}

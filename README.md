@@ -7,12 +7,13 @@
 
 <!-- badges: start -->
 
-[![Codecov](https://codecov.io/gh/andrewallenbruce/pathologie/branch/main/graph/badge.svg)](https://codecov.io/gh/andrewallenbruce/pathologie)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie)
 [![Code
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie)
 [![Last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie/commits/main)
+[![Codecov test
+coverage](https://codecov.io/gh/andrewallenbruce/pathologie/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/pathologie)
 <!-- badges: end -->
 
 ## :package: Installation
