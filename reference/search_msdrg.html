@@ -13,7 +13,7 @@ a single payment category."><link rel="stylesheet" href="https://cdn.jsdelivr.ne
 
     <a class="navbar-brand me-2" href="../index.html">pathologie</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@ a single payment category."><link rel="stylesheet" href="https://cdn.jsdelivr.ne
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Medicare Severity Diagnosis-Related Groups</h1>
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/pathologie/blob/main/R/msdrg.R" class="external-link"><code>R/msdrg.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/pathologie/blob/main/R/appendices.R" class="external-link"><code>R/appendices.R</code></a></small>
       <div class="d-none name"><code>search_msdrg.Rd</code></div>
     </div>
 
@@ -49,7 +49,7 @@ a single payment category.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">search_msdrg</span><span class="op">(</span>drg <span class="op">=</span> <span class="cn">NULL</span>, mdc <span class="op">=</span> <span class="cn">NULL</span>, type <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">search_msdrg</span><span class="op">(</span>drg <span class="op">=</span> <span class="cn">NULL</span>, mdc <span class="op">=</span> <span class="cn">NULL</span>, type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -66,10 +66,6 @@ a single payment category.</p>
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
 <dd><p><code>&lt;chr&gt;</code> DRG type: <code>Medical</code> or <code>Surgical</code></p></dd>
-
-
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Empty dots</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -109,6 +105,7 @@ receive less reimbursement.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 963   OTHER MULTIPLE SIGNIFICANT TR… 24    Multiple Signi… Medical  M         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 964   OTHER MULTIPLE SIGNIFICANT TR… 24    Multiple Signi… Medical  M         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> 965   OTHER MULTIPLE SIGNIFICANT TR… 24    Multiple Signi… Medical  M         </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -116,7 +113,7 @@ receive less reimbursement.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Andrew Bruce.</p>
+  <p>Developed by Andrew Allen Bruce.</p>
 </div>
 
 <div class="pkgdown-footer-right">
