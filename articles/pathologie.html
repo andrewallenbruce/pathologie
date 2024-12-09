@@ -79,7 +79,7 @@
 <span>         Abbreviation    <span class="op">=</span> <span class="va">icd_ch_abb</span>,</span>
 <span>         <span class="st">"Conflict Group"</span> <span class="op">=</span> <span class="va">icd_conflict_group</span>,</span>
 <span>         <span class="st">"Conflict Rule"</span>  <span class="op">=</span> <span class="va">icd_conflict_rule</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://andrewallenbruce.github.io/fuimus/reference/display_long.html" class="external-link">display_long</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="op">(</span>groupname_col       <span class="op">=</span> <span class="st">"name"</span>, </span>
 <span>     row_group_as_column <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">fmt_markdown</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -698,7 +698,7 @@ containing “Z”:</p>
 </h2>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ex_data.html">ex_data</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>patient_age <span class="op">=</span> <span class="fu"><a href="https://andrewallenbruce.github.io/fuimus/reference/years_floor.html" class="external-link">years_floor</a></span><span class="op">(</span><span class="va">date_of_birth</span>,</span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>patient_age <span class="op">=</span> <span class="fu"><a href="../reference/years_floor.html">years_floor</a></span><span class="op">(</span><span class="va">date_of_birth</span>,</span>
 <span>                                          <span class="va">date_of_service</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/search_edits.html">search_edits</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">icd_conflict_group</span> <span class="op">==</span> <span class="st">"Age"</span><span class="op">)</span> <span class="op">|&gt;</span></span>

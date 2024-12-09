@@ -74,23 +74,25 @@
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/pathologie/">pathologie</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/fuimus/" class="external-link">fuimus</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>icd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I10"</span>, <span class="st">"I15.0"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Rows: 2</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/icd10cm.html">icd10cm</a></span><span class="op">(</span>icd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"I15.0"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: 1</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; $ icd_ch_no       &lt;int&gt; 9, 9</span></span>
-<span><span class="co">#&gt; $ icd_ch_abb      &lt;chr&gt; "CARDIO", "CARDIO"</span></span>
-<span><span class="co">#&gt; $ icd_ch_name     &lt;chr&gt; "Diseases of the circulatory system", "Diseases of the…</span></span>
-<span><span class="co">#&gt; $ icd_ch_range    &lt;chr&gt; "I00 - I99", "I00 - I99"</span></span>
-<span><span class="co">#&gt; $ icd_sec_name    &lt;chr&gt; "Other rheumatic heart diseases", "Secondary hypertens…</span></span>
-<span><span class="co">#&gt; $ icd_sec_range   &lt;chr&gt; "I09 - I10", "I15 - I15.9"</span></span>
-<span><span class="co">#&gt; $ order           &lt;int&gt; 11397, 11411</span></span>
-<span><span class="co">#&gt; $ valid           &lt;int&gt; 1, 1</span></span>
-<span><span class="co">#&gt; $ icd_code        &lt;chr&gt; "I10", "I15.0"</span></span>
-<span><span class="co">#&gt; $ icd_description &lt;chr&gt; "Essential (primary) hypertension", "Renovascular hype…</span></span></code></pre></div>
+<span><span class="co">#&gt; $ icd_ch_no       &lt;int&gt; 9</span></span>
+<span><span class="co">#&gt; $ icd_ch_abb      &lt;chr&gt; "CARDIO"</span></span>
+<span><span class="co">#&gt; $ icd_ch_name     &lt;chr&gt; "Diseases of the circulatory system"</span></span>
+<span><span class="co">#&gt; $ icd_ch_range    &lt;chr&gt; "I00 - I99"</span></span>
+<span><span class="co">#&gt; $ icd_sec_name    &lt;chr&gt; "Secondary hypertension"</span></span>
+<span><span class="co">#&gt; $ icd_sec_range   &lt;chr&gt; "I15 - I15.9"</span></span>
+<span><span class="co">#&gt; $ order           &lt;int&gt; 11411</span></span>
+<span><span class="co">#&gt; $ valid           &lt;int&gt; 1</span></span>
+<span><span class="co">#&gt; $ icd_code        &lt;chr&gt; "I15.0"</span></span>
+<span><span class="co">#&gt; $ icd_description &lt;chr&gt; "Renovascular hypertension"</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="nlm-icd-10-cm-api">NLM ICD-10-CM API<a class="anchor" aria-label="anchor" href="#nlm-icd-10-cm-api"></a>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/icd10api.html">icd10api</a></span><span class="op">(</span>icd_code <span class="op">=</span> <span class="st">"I1"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 18 × 2</span></span>
@@ -115,49 +117,39 @@
 <span><span class="co">#&gt; 17 I16.9    Hypertensive crisis, unspecified                                    </span></span>
 <span><span class="co">#&gt; 18 I1A.0    Resistant hypertension</span></span></code></pre></div>
 </div>
-</div>
-<div class="section level1">
-<h1 id="icd-10-cm-conflict-rules">ICD-10-CM Conflict Rules<a class="anchor" aria-label="anchor" href="#icd-10-cm-conflict-rules"></a>
-</h1>
+<div class="section level2">
+<h2 id="conflict-edit-rules">Conflict Edit Rules<a class="anchor" aria-label="anchor" href="#conflict-edit-rules"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ex_data.html">ex_data</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    patient_age <span class="op">=</span> <span class="fu"><a href="https://andrewallenbruce.github.io/fuimus/reference/years_floor.html" class="external-link">years_floor</a></span><span class="op">(</span></span>
-<span>      <span class="va">date_of_birth</span>, </span>
-<span>      <span class="va">date_of_service</span></span>
-<span>      <span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="reference/search_edits.html">search_edits</a></span><span class="op">(</span><span class="op">)</span>, </span>
-<span>    by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">icd_code</span><span class="op">)</span>, </span>
-<span>    relationship <span class="op">=</span> <span class="st">"many-to-many"</span></span>
-<span>    <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
-<span>    <span class="va">icd_conflict_group</span> <span class="op">==</span> <span class="st">"Age"</span></span>
-<span>    <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    conflict <span class="op">=</span> <span class="fu"><a href="reference/apply_age_edits.html">apply_age_edits</a></span><span class="op">(</span></span>
-<span>      rule <span class="op">=</span> <span class="va">icd_conflict_rule</span>,</span>
-<span>      age <span class="op">=</span> <span class="va">patient_age</span></span>
-<span>      <span class="op">)</span></span>
-<span>    <span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 224 × 8</span></span>
-<span><span class="co">#&gt;    date_of_birth date_of_service icd_code patient_age icd_description           </span></span>
-<span><span class="co">#&gt;    &lt;date&gt;        &lt;date&gt;          &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;                     </span></span>
-<span><span class="co">#&gt;  1 2015-11-27    2023-01-08      Z00.00             7 Encntr for general adult …</span></span>
-<span><span class="co">#&gt;  2 1990-11-07    2023-11-13      F53.0             33 Postpartum depression     </span></span>
-<span><span class="co">#&gt;  3 2006-12-23    2023-09-26      F64.2             16 Gender identity disorder …</span></span>
-<span><span class="co">#&gt;  4 1986-01-25    2023-08-05      Z91.82            37 Personal history of milit…</span></span>
-<span><span class="co">#&gt;  5 1992-10-23    2023-06-29      O90.6             30 Postpartum mood disturban…</span></span>
-<span><span class="co">#&gt;  6 2014-01-25    2023-06-27      Z00.00             9 Encntr for general adult …</span></span>
-<span><span class="co">#&gt;  7 2011-01-07    2023-04-12      F64.2             12 Gender identity disorder …</span></span>
-<span><span class="co">#&gt;  8 1992-12-03    2023-03-02      F53.0             30 Postpartum depression     </span></span>
-<span><span class="co">#&gt;  9 2000-11-12    2023-10-16      F53.0             22 Postpartum depression     </span></span>
-<span><span class="co">#&gt; 10 1993-10-12    2022-12-13      F53.0             29 Postpartum depression     </span></span>
-<span><span class="co">#&gt; # ℹ 214 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 3 more variables: icd_conflict_group &lt;chr&gt;, icd_conflict_rule &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   conflict &lt;chr&gt;</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html" class="external-link">reframe</a></span><span class="op">(</span>dob <span class="op">=</span> <span class="va">date_of_birth</span>,</span>
+<span>          dos <span class="op">=</span> <span class="va">date_of_service</span>,</span>
+<span>          <span class="va">icd_code</span>,</span>
+<span>          age <span class="op">=</span> <span class="fu"><a href="reference/years_floor.html">years_floor</a></span><span class="op">(</span><span class="va">dob</span>, <span class="va">dos</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">right_join</a></span><span class="op">(</span><span class="fu"><a href="reference/search_edits.html">search_edits</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Age"</span><span class="op">)</span>, </span>
+<span>             by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">icd_code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    conflict <span class="op">=</span> <span class="fu"><a href="reference/apply_age_edits.html">apply_age_edits</a></span><span class="op">(</span><span class="va">icd_conflict_rule</span>, <span class="va">age</span><span class="op">)</span>,</span>
+<span>    dob <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    dos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    icd_conflict_group <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 3,780 × 5</span></span>
+<span><span class="co">#&gt;    icd_code   age icd_description                     icd_conflict_rule conflict</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;                               &lt;chr&gt;             &lt;chr&gt;   </span></span>
+<span><span class="co">#&gt;  1 Z00.00       7 Encntr for general adult medical e… Adult (Ages 15-1… Age Con…</span></span>
+<span><span class="co">#&gt;  2 F53.0       33 Postpartum depression               Maternity (Ages … &lt;NA&gt;    </span></span>
+<span><span class="co">#&gt;  3 F64.2       16 Gender identity disorder of childh… Pediatric (Ages … &lt;NA&gt;    </span></span>
+<span><span class="co">#&gt;  4 Z91.82      37 Personal history of military deplo… Adult (Ages 15-1… &lt;NA&gt;    </span></span>
+<span><span class="co">#&gt;  5 O90.6       30 Postpartum mood disturbance         Maternity (Ages … &lt;NA&gt;    </span></span>
+<span><span class="co">#&gt;  6 Z00.00       9 Encntr for general adult medical e… Adult (Ages 15-1… Age Con…</span></span>
+<span><span class="co">#&gt;  7 F64.2       12 Gender identity disorder of childh… Pediatric (Ages … &lt;NA&gt;    </span></span>
+<span><span class="co">#&gt;  8 F53.0       30 Postpartum depression               Maternity (Ages … &lt;NA&gt;    </span></span>
+<span><span class="co">#&gt;  9 F53.0       22 Postpartum depression               Maternity (Ages … &lt;NA&gt;    </span></span>
+<span><span class="co">#&gt; 10 F53.0       29 Postpartum depression               Maternity (Ages … &lt;NA&gt;    </span></span>
+<span><span class="co">#&gt; # ℹ 3,770 more rows</span></span></code></pre></div>
 <hr>
+</div>
 <div class="section level2">
 <h2 id="balance_scale-code-of-conduct">
 <span class="emoji" data-emoji="balance_scale">⚖️</span> Code of Conduct<a class="anchor" aria-label="anchor" href="#balance_scale-code-of-conduct"></a>
@@ -171,7 +163,6 @@
 <p>This project is primarily maintained by <a href="https://github.com/andrewallenbruce" class="external-link">Andrew Bruce</a>. Other authors may occasionally assist with some of these duties.</p>
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -216,6 +207,7 @@
 <li><a href="https://github.com/andrewallenbruce/pathologie" class="external-link"><img src="https://img.shields.io/github/languages/code-size/andrewallenbruce/pathologie.svg" alt="Code size"></a></li>
 <li><a href="https://github.com/andrewallenbruce/pathologie/commits/main" class="external-link"><img src="https://img.shields.io/github/last-commit/andrewallenbruce/pathologie.svg" alt="Last commit"></a></li>
 <li><a href="https://app.codecov.io/gh/andrewallenbruce/pathologie" class="external-link"><img src="https://codecov.io/gh/andrewallenbruce/pathologie/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://choosealicense.com/licenses/mit/" class="external-link"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a></li>
 </ul>
 </div>
 
