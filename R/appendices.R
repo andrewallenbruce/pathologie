@@ -1,62 +1,122 @@
-#' Appendix A: List of MS-DRGs Version 41.1
+#' Medicare Severity Diagnosis-Related Groups
 #'
-#' Appendix A contains a list of each MS-DRG with a specification of the MDC and
-#' whether the MS-DRG is medical or surgical. Some MS-DRGs which contain patients
-#' from multiple MDCs (e.g., 014 Allogeneic Bone Marrow Transplant) do not have
-#' an MDC specified. The letter M is used to designate a medical MS-DRG and the
+#' The Medicare Severity Diagnosis-Related Group (MS-DRG) is a classification
+#' system used by the Centers for Medicare and Medicaid Services (CMS) to group
+#' patients with similar clinical characteristics and resource utilization into
+#' a single payment category.
+#'
+#' The system is primarily used for Medicare reimbursement purposes, but it is
+#' also adopted by many other payers as a basis for payment determination.
+#'
+#' MS-DRGs are based on the principal diagnosis, up to 24 additional diagnoses,
+#' and up to 25 procedures performed during the stay. In a small number of
+#' MS-DRGs, classification is also based on the age, sex, and discharge status
+#' of the patient.
+#'
+#' Hospitals serving more severely ill patients receive increased
+#' reimbursements, while hospitals treating less severely ill patients will
+#' receive less reimbursement.
+#'
+#' @param drg `<chr>` vector of 3-digit DRG codes
+#'
+#' @param mdc `<chr>` vector of 2-digit Major Diagnostic Category codes
+#'
+#' @param type `<chr>` DRG type: `Medical` or `Surgical`
+#'
+#' @template returns
+#'
+#' @examples
+#' search_msdrg(drg = "011")
+#'
+#' search_msdrg(mdc = "24")
+#'
+#' @autoglobal
+#'
+#' @export
+search_msdrg <- function(drg  = NULL, mdc  = NULL, type = NULL) {
+
+  x <- get_pin("msdrg")
+  x <- search_in(x, x[["drg"]], drg)
+  x <- search_in(x, x[["mdc"]], mdc)
+  x <- search_in(x, x[["drg_type"]], type)
+
+  return(x)
+}
+
+#' MS-DRG List
+#'
+#' __Appendix A__: Contains each MS-DRG with a specification of
+#' the MDC and whether the MS-DRG is Medical or Surgical.
+#'
+#' Some MS-DRGs which contain patients from multiple MDCs
+#' e.g., `"014"` (Allogeneic Bone Marrow Transplant) do not
+#' have an MDC specified.
+#'
+#' The letter M is used to designate a medical MS-DRG and the
 #' letter P is used to designate a surgical MS-DRG.
 #'
 #' @template args-drg
 #'
 #' @template args-mdc
 #'
-#' @param type `<chr>` DRG type: `M` (Medical) or `P` (Surgical)
-#'
-#' @template args-dots
+#' @param type `<chr>` `"M"` (Medical) or `"P"` (Surgical)
 #'
 #' @template returns
 #'
 #' @examples
-#' appendix_A(drg = "011")
+#' msdrg_list(drg = "014")
 #'
-#' appendix_A(mdc = "24")
+#' msdrg_list(mdc = "24")
+#'
+#' msdrg_list(type = "M")
 #'
 #' @autoglobal
 #'
 #' @export
-appendix_A <- function(drg  = NULL,
-                       mdc  = NULL,
-                       type = NULL,
-                       ...) {
+msdrg_list <- function(drg = NULL, mdc  = NULL, type = NULL) {
 
-  msd <- pins::pin_read(mount_board(), "msdrg_41.1")
+  x <- get_pin("msdrg_41.1")
+  x <- search_in(x, x[["drg_abb"]], type)
+  x <- search_in(x, x[["drg"]], drg)
+  x <- search_in(x, x[["mdc"]], mdc)
 
-  if (!is.null(type)) {
-    msd <- vctrs::vec_slice(msd, msd$drg_type == type)
-  }
-
-  msd <- fuimus::search_in_if(msd, msd$drg, drg)
-  msd <- fuimus::search_in_if(msd, msd$mdc, mdc)
-
-  return(msd)
+  return(x)
 }
 
-#' Appendix B: Diagnosis Code/MDC/MS-DRG Index
+#' ICD-10-CM|MDC|MS-DRG Index
 #'
-#' The Diagnosis Code/MDC/MS-DRG Index lists each diagnosis code, as well as
-#' the MDC, and the MS-DRGs to which the diagnosis is used to define the logic
-#' of the DRG either as a principal or secondary diagnosis.
+#' __Appendix B__: ICD-10-CM|MDC|MS-DRG Index
+#'
+#' The Diagnosis Code/MDC/MS-DRG Index lists each ICD-10-CM code,
+#' the MDC and the MS-DRGs to which the diagnosis is used to define
+#' the logic of the MS-DRG either as a principal or secondary diagnosis.
+#'
+#' @param icd `<chr>` ICD-10-CM code
+#'
+#' @template args-drg
+#'
+#' @template args-mdc
 #'
 #' @template returns
 #'
 #' @examples
-#' head(appendix_B())
+#' msdrg_index(icd = "A17.81")
+#'
+#' msdrg_index(drg = "011")
+#'
+#' msdrg_index(mdc = "24")
 #'
 #' @autoglobal
 #'
 #' @export
-appendix_B <- function() {
-  pins::pin_read(mount_board(), "msdrg_index_41.1")
+msdrg_index <- function(icd = NULL, drg = NULL, mdc  = NULL) {
+
+  x <- get_pin("msdrg_index_41.1")
+  x <- search_in(x, x[["icd_code"]], icd)
+  x <- search_in(x, x[["drg"]], drg)
+  x <- search_in(x, x[["mdc"]], mdc)
+
+  return(x)
 }
 
 #' Appendix C: Complications or Comorbidities Exclusion list
@@ -83,32 +143,27 @@ appendix_B <- function() {
 #' @param pdx `<chr>` 4-digit Principal Diagnosis (PDX) Group number, e.g.,
 #'   `0011` (~ 2,040 in total)
 #'
-#' @param unnest `<lgl>` Unnest the `pdx_icd` column
-#'
-#' @template args-dots
+#' @param unnest `<lgl>` Unnest the `pdx_icd` column; default is `FALSE`
 #'
 #' @template returns
 #'
 #' @examples
-#' appendix_C(icd = "A17.81")
+#' msdrg_pdx(icd = "A17.81")
 #'
-#' appendix_C(pdx = "0032")
+#' msdrg_pdx(pdx = "0032")
 #'
 #' @autoglobal
 #'
 #' @export
-appendix_C <- function(icd = NULL,
-                       pdx = NULL,
-                       unnest = FALSE,
-                       ...) {
+msdrg_pdx <- function(icd = NULL, pdx = NULL, unnest = FALSE) {
 
-  mcc <- pins::pin_read(mount_board(), "msdrg_ccmcc_41.1")
+  x <- get_pin("msdrg_ccmcc_41.1")
+  x <- search_in(x, x[["pdx_group"]], pdx)
+  x <- search_in(x, x[["icd_code"]], icd)
 
-  mcc <- fuimus::search_in_if(mcc, mcc$pdx_group, pdx)
+  if (unnest) x <- tidyr::unnest(x, pdx_icd)
 
-  mcc <- fuimus::search_in_if(mcc, mcc$icd_code, icd)
-
-  return(mcc)
+  return(x)
 }
 
 
@@ -157,9 +212,7 @@ appendix_C <- function(icd = NULL,
 #' @autoglobal
 #'
 #' @export
-appendix_D <- function() {
-  pins::pin_read(mount_board(), "msdrg_drg_groups_41.1")
-}
+appendix_D <- \() get_pin("msdrg_drg_groups_41.1")
 
 #' Appendix G Diagnoses Defined as Complications or Comorbidities
 #'
@@ -175,9 +228,7 @@ appendix_D <- function() {
 #' @autoglobal
 #'
 #' @export
-appendix_G <- function() {
-  pins::pin_read(mount_board(), "msdrg_icd_ccs_41.1")
-}
+appendix_G <- \() get_pin("msdrg_icd_ccs_41.1")
 
 #' Appendix H Diagnoses Defined as Major Complications or Comorbidities
 #'
@@ -196,6 +247,4 @@ appendix_G <- function() {
 #' @autoglobal
 #'
 #' @export
-appendix_H <- function() {
-  pins::pin_read(mount_board(), "msdrg_icd_mccs_41.1")
-}
+appendix_H <- \() get_pin("msdrg_icd_mccs_41.1")

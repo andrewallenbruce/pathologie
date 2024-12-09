@@ -1,0 +1,108 @@
+#' Is `x` `NULL`?
+#'
+#' @param x vector
+#'
+#' @returns `<lgl>` `TRUE` if `x` is `NULL`, `FALSE` otherwise
+#'
+#' @autoglobal
+#'
+#' @noRd
+null <- \(x) is.null(x)
+
+#' Is `x` not `NULL`?
+#'
+#' @param x vector
+#'
+#' @returns `<lgl>` `FALSE` if `x` is `NULL`, `TRUE` otherwise
+#'
+#' @autoglobal
+#'
+#' @noRd
+not_null <- \(x) !is.null(x)
+
+#' Is `x` empty?
+#'
+#' @param x vector
+#'
+#' @returns `<lgl>`
+#'
+#' @autoglobal
+#'
+#' @noRd
+empty <- \(x) vctrs::vec_is_empty(x)
+
+#' Is `x` `NA`?
+#'
+#' @param x vector
+#'
+#' @returns `<lgl>`
+#'
+#' @autoglobal
+#'
+#' @noRd
+na <- \(x) cheapr::is_na(x)
+
+#' Is `x` not `NA`?
+#'
+#' @param x vector
+#'
+#' @returns `<lgl>`
+#'
+#' @autoglobal
+#'
+#' @noRd
+not_na <- \(x) !na(x)
+
+#' Detect by Regex
+#'
+#' @param s `<chr>` vector
+#'
+#' @param p `<chr>` regex pattern
+#'
+#' @returns `<lgl>` vector the same length as `s`
+#'
+#' @autoglobal
+#'
+#' @noRd
+rdetect <- \(s, p) stringfish::sf_grepl(s, p, nthreads = 4L)
+
+#' Remove by Regex
+#'
+#' @param s `<chr>` vector
+#'
+#' @param p `<chr>` regex pattern
+#'
+#' @param fix `<lgl>` fixed pattern matching
+#'
+#' @returns `<chr>` vector the same length as `s`
+#'
+#' @autoglobal
+#'
+#' @noRd
+rremove <- \(s, p, fix = FALSE) stringfish::sf_gsub(s, p, "", nthreads = 4L, fixed = fix)
+
+#' Count of characters in character vector
+#'
+#' @param x `<chr>` vector
+#'
+#' @returns `<int>` vector of character counts
+#'
+#' @autoglobal
+#'
+#' @noRd
+rnchar <- \(x) stringfish::sf_nchar(x, nthreads = 4L)
+
+#' Fast ifelse wrapper
+#'
+#' @param x `<lgl>` vector
+#'
+#' @param yes,no Values to return depending on TRUE/FALSE element of `x`. Must
+#'   be same type and be either length 1 or same length of `x`.
+#'
+#' @returns vector of same length as `x` and attributes as `yes`. Data values
+#'          are taken from values of `yes` and `no`.
+#'
+#' @autoglobal
+#'
+#' @noRd
+iifelse <- \(x, yes, no) kit::iif(test = x, yes = yes, no = no, nThread = 4L)

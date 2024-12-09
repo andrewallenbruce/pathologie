@@ -4,12 +4,10 @@
 \alias{search_edits}
 \title{ICD-10-CM Code Edits}
 \usage{
-search_edits(icd = NULL, ...)
+search_edits(icd = NULL)
 }
 \arguments{
 \item{icd}{\verb{<chr>} vector of ICD-10-CM codes}
-
-\item{...}{Empty dots}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

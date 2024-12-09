@@ -9,6 +9,8 @@ utils::globalVariables(c(
   "icd_description",
   # <icd10cm>
   "icd_sec_code",
+  # <msdrg_pdx>
+  "pdx_icd",
   # <icd10api>
   # <.multiple_request>
   "V1",

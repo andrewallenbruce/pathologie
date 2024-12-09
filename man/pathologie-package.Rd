@@ -4,9 +4,9 @@
 \name{pathologie-package}
 \alias{pathologie}
 \alias{pathologie-package}
-\title{pathologie: Tidy ICD-10-CM Tools}
+\title{pathologie: Tidy ICD-10-CM Interface}
 \description{
-Tools for working with ICD-10-CM codes.
+Tidy tools for accessing and working with ICD-10-CM.
 }
 \seealso{
 Useful links:
@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Andrew Bruce \email{andrewallenbruce@gmail.com} [copyright holder]
+\strong{Maintainer}: Andrew Allen Bruce \email{andrewallenbruce@gmail.com} [copyright holder]
 
 }
 \keyword{internal}

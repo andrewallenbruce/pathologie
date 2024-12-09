@@ -10,8 +10,6 @@
 #'
 #' @template args-icd_code
 #'
-#' @template args-dots
-#'
 #' @template returns
 #'
 #' @examples
@@ -20,13 +18,11 @@
 #' @autoglobal
 #'
 #' @export
-search_edits <- function(icd = NULL, ...) {
+search_edits <- function(icd = NULL) {
 
-  edt <- pins::pin_read(mount_board(), "code_edits")
-
-  edt <- fuimus::search_in_if(edt, edt$icd_code, icd)
-
-  return(edt)
+  x <- get_pin("code_edits")
+  x <- search_in(x, x[["icd_code"]], icd)
+  return(x)
 }
 
 #' Apply Age Conflict Edits

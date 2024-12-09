@@ -10,3 +10,9 @@ template:
   includes:
     in_header: <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
 
+home:
+  title: pathologie • Tidy ICD-10-CM Interface
+  description: >
+    Tidy tools for accessing and working with ICD-10-CM.
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
