@@ -17,7 +17,7 @@
 #' @examples
 #' search_edits(icd = c("Q96.8", "N47.0", "R45.4", "A33"))
 #'
-#' search_edits(group = "Other)
+#' search_edits(group = "Other")
 #'
 #' @autoglobal
 #'
