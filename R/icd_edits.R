@@ -10,17 +10,22 @@
 #'
 #' @template args-icd_code
 #'
+#' @param group `<chr>` Conflict Group: `Age`, `Sex`, `Other`
+#'
 #' @template returns
 #'
 #' @examples
-#' search_edits(c("Q96.8", "N47.0", "R45.4", "A33"))
+#' search_edits(icd = c("Q96.8", "N47.0", "R45.4", "A33"))
+#'
+#' search_edits(group = "Other)
 #'
 #' @autoglobal
 #'
 #' @export
-search_edits <- function(icd = NULL) {
+search_edits <- function(icd = NULL, group = NULL) {
 
   x <- get_pin("code_edits")
+  x <- search_in(x, x[["icd_conflict_group"]], group)
   x <- search_in(x, x[["icd_code"]], icd)
   return(x)
 }
@@ -48,9 +53,9 @@ apply_age_edits <- function(rule, age) {
 
   dplyr::case_when(
     rule == "Perinatal/Newborn (Age 0 Only)" & age != 0 ~ msg,
-    rule == "Pediatric (Ages 0-17)" & dplyr::between(age, 0, 17) == FALSE ~ msg,
-    rule == "Maternity (Ages 9-64)" & dplyr::between(age, 9, 64) == FALSE ~ msg,
-    rule == "Adult (Ages 15-124)" & dplyr::between(age, 15, 124) == FALSE ~ msg,
+    rule == "Pediatric (Ages 0-17)" & !dplyr::between(age, 0, 17) ~ msg,
+    rule == "Maternity (Ages 9-64)" & !dplyr::between(age, 9, 64) ~ msg,
+    rule == "Adult (Ages 15-124)" & !dplyr::between(age, 15, 124) ~ msg,
     .default = NA_character_
   )
 }

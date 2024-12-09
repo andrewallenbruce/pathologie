@@ -4,10 +4,12 @@
 \alias{search_edits}
 \title{ICD-10-CM Code Edits}
 \usage{
-search_edits(icd = NULL)
+search_edits(icd = NULL, group = NULL)
 }
 \arguments{
 \item{icd}{\verb{<chr>} vector of ICD-10-CM codes}
+
+\item{group}{\verb{<chr>} Conflict Group: \code{Age}, \code{Sex}, \code{Other}}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
@@ -21,8 +23,4 @@ FY 2024 – Version 41.1 (Effective April 1, 2024 through September 30, 2024)
 The \strong{ICD-10 Definitions of Medicare Code Edits} file contains the following: A
 description of each coding edit with the corresponding code lists as well as
 all the edits and the code lists effective for FY 2024.
-}
-\examples{
-search_edits(c("Q96.8", "N47.0", "R45.4", "A33"))
-
 }

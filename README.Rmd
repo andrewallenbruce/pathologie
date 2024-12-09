@@ -18,10 +18,12 @@ knitr::opts_chunk$set(
 > Tidy ICD-10-CM Interface
 
 <!-- badges: start -->
+![GitHub R package version](https://img.shields.io/github/r-package/v/andrewallenbruce/pathologie?style=flat-square&logo=R&label=Package&color=%23192a38)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie)
 [![Code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie)
 [![Last commit](https://img.shields.io/github/last-commit/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie/commits/main)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/pathologie/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/pathologie)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
 <!-- badges: end -->
 
 ## :package: Installation
@@ -37,45 +39,36 @@ pak::pak("andrewallenbruce/pathologie")
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(pathologie)
-library(fuimus)
 library(dplyr)
 ```
 
 
 ```{r}
-icd10cm(icd = c("I10", "I15.0")) |> 
-  glimpse()
+icd10cm(icd = c("I15.0")) |> glimpse()
 ```
 
+## NLM ICD-10-CM API
 
 ```{r}
 icd10api(icd_code = "I1")
 ```
 
-# ICD-10-CM Conflict Rules
+## Conflict Edit Rules
 
 ```{r}
 ex_data() |>
-  dplyr::mutate(
-    patient_age = years_floor(
-      date_of_birth, 
-      date_of_service
-      )
-    ) |>
-  dplyr::left_join(
-    search_edits(), 
-    by = dplyr::join_by(icd_code), 
-    relationship = "many-to-many"
-    ) |>
-  dplyr::filter(
-    icd_conflict_group == "Age"
-    ) |>
-  dplyr::mutate(
-    conflict = apply_age_edits(
-      rule = icd_conflict_rule,
-      age = patient_age
-      )
-    )
+  reframe(dob = date_of_birth,
+          dos = date_of_service,
+          icd_code,
+          age = years_floor(dob, dos)) |>
+  right_join(search_edits(group = "Age"), 
+             by = join_by(icd_code)) |>
+  mutate(
+    conflict = apply_age_edits(icd_conflict_rule, age),
+    dob = NULL,
+    dos = NULL,
+    icd_conflict_group = NULL
+  )
 ```
 
 

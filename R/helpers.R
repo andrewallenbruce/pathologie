@@ -1,3 +1,27 @@
+#' Years between two dates, rounded down to nearest whole number
+#'
+#' @param from `<date>` Start date
+#'
+#' @param to `<date>` End date
+#'
+#' @returns `<int>` vector; number of years between `from` and `to`, rounded
+#'   down to nearest whole number
+#'
+#' @examples
+#' years_floor(
+#'    as.Date("2020-01-01"),
+#'    as.Date("2020-01-01") + 2057)
+#'
+#' @autoglobal
+#'
+#' @export
+years_floor <- \(from, to) {
+  floor(
+    as.integer(
+      difftime(to, from, units = "weeks", tz = "UTC")
+    ) / 52.17857)
+}
+
 #' Is `x` `NULL`?
 #'
 #' @param x vector

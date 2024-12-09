@@ -7,6 +7,8 @@
 
 <!-- badges: start -->
 
+![GitHub R package
+version](https://img.shields.io/github/r-package/v/andrewallenbruce/pathologie?style=flat-square&logo=R&label=Package&color=%23192a38)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/pathologie)
 [![Code
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie)
@@ -14,6 +16,8 @@ size](https://img.shields.io/github/languages/code-size/andrewallenbruce/patholo
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/pathologie.svg)](https://github.com/andrewallenbruce/pathologie/commits/main)
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/pathologie/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/pathologie)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
 <!-- badges: end -->
 
 ## :package: Installation
@@ -29,26 +33,26 @@ pak::pak("andrewallenbruce/pathologie")
 
 ``` r
 library(pathologie)
-library(fuimus)
 library(dplyr)
 ```
 
 ``` r
-icd10cm(icd = c("I10", "I15.0")) |> 
-  glimpse()
-#> Rows: 2
+icd10cm(icd = c("I15.0")) |> glimpse()
+#> Rows: 1
 #> Columns: 10
-#> $ icd_ch_no       <int> 9, 9
-#> $ icd_ch_abb      <chr> "CARDIO", "CARDIO"
-#> $ icd_ch_name     <chr> "Diseases of the circulatory system", "Diseases of the…
-#> $ icd_ch_range    <chr> "I00 - I99", "I00 - I99"
-#> $ icd_sec_name    <chr> "Other rheumatic heart diseases", "Secondary hypertens…
-#> $ icd_sec_range   <chr> "I09 - I10", "I15 - I15.9"
-#> $ order           <int> 11397, 11411
-#> $ valid           <int> 1, 1
-#> $ icd_code        <chr> "I10", "I15.0"
-#> $ icd_description <chr> "Essential (primary) hypertension", "Renovascular hype…
+#> $ icd_ch_no       <int> 9
+#> $ icd_ch_abb      <chr> "CARDIO"
+#> $ icd_ch_name     <chr> "Diseases of the circulatory system"
+#> $ icd_ch_range    <chr> "I00 - I99"
+#> $ icd_sec_name    <chr> "Secondary hypertension"
+#> $ icd_sec_range   <chr> "I15 - I15.9"
+#> $ order           <int> 11411
+#> $ valid           <int> 1
+#> $ icd_code        <chr> "I15.0"
+#> $ icd_description <chr> "Renovascular hypertension"
 ```
+
+## NLM ICD-10-CM API
 
 ``` r
 icd10api(icd_code = "I1")
@@ -75,46 +79,36 @@ icd10api(icd_code = "I1")
 #> 18 I1A.0    Resistant hypertension
 ```
 
-# ICD-10-CM Conflict Rules
+## Conflict Edit Rules
 
 ``` r
 ex_data() |>
-  dplyr::mutate(
-    patient_age = years_floor(
-      date_of_birth, 
-      date_of_service
-      )
-    ) |>
-  dplyr::left_join(
-    search_edits(), 
-    by = dplyr::join_by(icd_code), 
-    relationship = "many-to-many"
-    ) |>
-  dplyr::filter(
-    icd_conflict_group == "Age"
-    ) |>
-  dplyr::mutate(
-    conflict = apply_age_edits(
-      rule = icd_conflict_rule,
-      age = patient_age
-      )
-    )
-#> # A tibble: 224 × 8
-#>    date_of_birth date_of_service icd_code patient_age icd_description           
-#>    <date>        <date>          <chr>          <dbl> <chr>                     
-#>  1 2015-11-27    2023-01-08      Z00.00             7 Encntr for general adult …
-#>  2 1990-11-07    2023-11-13      F53.0             33 Postpartum depression     
-#>  3 2006-12-23    2023-09-26      F64.2             16 Gender identity disorder …
-#>  4 1986-01-25    2023-08-05      Z91.82            37 Personal history of milit…
-#>  5 1992-10-23    2023-06-29      O90.6             30 Postpartum mood disturban…
-#>  6 2014-01-25    2023-06-27      Z00.00             9 Encntr for general adult …
-#>  7 2011-01-07    2023-04-12      F64.2             12 Gender identity disorder …
-#>  8 1992-12-03    2023-03-02      F53.0             30 Postpartum depression     
-#>  9 2000-11-12    2023-10-16      F53.0             22 Postpartum depression     
-#> 10 1993-10-12    2022-12-13      F53.0             29 Postpartum depression     
-#> # ℹ 214 more rows
-#> # ℹ 3 more variables: icd_conflict_group <chr>, icd_conflict_rule <chr>,
-#> #   conflict <chr>
+  reframe(dob = date_of_birth,
+          dos = date_of_service,
+          icd_code,
+          age = years_floor(dob, dos)) |>
+  right_join(search_edits(group = "Age"), 
+             by = join_by(icd_code)) |>
+  mutate(
+    conflict = apply_age_edits(icd_conflict_rule, age),
+    dob = NULL,
+    dos = NULL,
+    icd_conflict_group = NULL
+  )
+#> # A tibble: 3,780 × 5
+#>    icd_code   age icd_description                     icd_conflict_rule conflict
+#>    <chr>    <dbl> <chr>                               <chr>             <chr>   
+#>  1 Z00.00       7 Encntr for general adult medical e… Adult (Ages 15-1… Age Con…
+#>  2 F53.0       33 Postpartum depression               Maternity (Ages … <NA>    
+#>  3 F64.2       16 Gender identity disorder of childh… Pediatric (Ages … <NA>    
+#>  4 Z91.82      37 Personal history of military deplo… Adult (Ages 15-1… <NA>    
+#>  5 O90.6       30 Postpartum mood disturbance         Maternity (Ages … <NA>    
+#>  6 Z00.00       9 Encntr for general adult medical e… Adult (Ages 15-1… Age Con…
+#>  7 F64.2       12 Gender identity disorder of childh… Pediatric (Ages … <NA>    
+#>  8 F53.0       30 Postpartum depression               Maternity (Ages … <NA>    
+#>  9 F53.0       22 Postpartum depression               Maternity (Ages … <NA>    
+#> 10 F53.0       29 Postpartum depression               Maternity (Ages … <NA>    
+#> # ℹ 3,770 more rows
 ```
 
 ------------------------------------------------------------------------
