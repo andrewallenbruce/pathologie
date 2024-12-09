@@ -24,3 +24,9 @@ The \strong{ICD-10 Definitions of Medicare Code Edits} file contains the followi
 description of each coding edit with the corresponding code lists as well as
 all the edits and the code lists effective for FY 2024.
 }
+\examples{
+search_edits(icd = c("Q96.8", "N47.0", "R45.4", "A33"))
+
+search_edits(group = "Other")
+
+}

@@ -84,6 +84,52 @@ insert_period <- \(x) iifelse(rnchar(x) > 3, gsub("^(.{3})(.*)$", paste0("\\1.\\
 #' @export
 remove_period <- \(x) rremove(x, ".", fix = TRUE)
 
+#' Generate Random ICD-10-CM Codes
+#'
+#' @param n `<numeric>` number of codes; default is `10`
+#'
+#' @param lng `<numeric>` vector of lengths; default is `c(3, 5:8)`
+#'
+#' @returns `<character>` vector
+#'
+#' @examples
+#' random_icd()
+#'
+#' random_icd(5, 8)
+#'
+#' @export
+#'
+#' @autoglobal
+random_icd <- function(n = 10, lng = c(3, 5:8)) {
+
+  .c(i3, i5, i6, i7, i8) %=% get_pin("icdlst")
+
+  sfconv(
+    sfcc(
+      if (any(lng == 3))
+        sample_(x = i3, size = n)
+      else
+        NULL,
+      if (any(lng == 5))
+        sample_(x = i5, size = n)
+      else
+        NULL,
+      if (any(lng == 6))
+        sample_(x = i6, size = n)
+      else
+        NULL,
+      if (any(lng == 7))
+        sample_(x = i7, size = n)
+      else
+        NULL,
+      if (any(lng == 8))
+        sample_(x = i8, size = n)
+      else
+        NULL
+    )
+  )
+}
+
 #' gt Theme
 #'
 #' @param tbl `<gt_tbl>` object

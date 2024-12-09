@@ -116,6 +116,31 @@ rremove <- \(s, p, fix = FALSE) stringfish::sf_gsub(s, p, "", nthreads = 4L, fix
 #' @noRd
 rnchar <- \(x) stringfish::sf_nchar(x, nthreads = 4L)
 
+#' Convert character vector to stringfish vector
+#'
+#' @param x `<chr>` vector
+#'
+#' @returns `<int>` vector of class `sf_string`
+#'
+#' @autoglobal
+#'
+#' @noRd
+sfconv <- \(x) stringfish::sf_convert(x)
+
+#' Concatenate Vectors
+#'
+#' @param ... Any number of vectors, coerced to `<character>` vector, if necessary
+#'
+#' @returns concatenated `<character>` vector
+#'
+#' @examples
+#' sf_c(LETTERS, "A")
+#'
+#' @autoglobal
+#'
+#' @export
+sfcc <- \(...) stringfish::sfc(...)
+
 #' Fast ifelse wrapper
 #'
 #' @param x `<lgl>` vector

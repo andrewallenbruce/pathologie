@@ -1,4 +1,4 @@
-test_that("validation checks works", {
+test_that("is_valid_icd() works", {
 
   # x <- c("H00.019", "D50.1", "C4A.70", "Z20.818", "11646", "E8015")
 
